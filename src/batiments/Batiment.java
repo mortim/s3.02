@@ -32,4 +32,9 @@ public abstract class Batiment {
     public int getLanding() {
         return landing;
     }
+
+    public void setMinMaxHab(int minhab, int maxhab) {
+        this.minhab = minhab;
+        this.maxhab = maxhab;
+    }    
 }
