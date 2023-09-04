@@ -1,3 +1,4 @@
+package com.cosmopolis;
 import java.util.Scanner;
 
 public class Jeu {

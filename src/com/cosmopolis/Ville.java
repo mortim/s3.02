@@ -1,3 +1,4 @@
+package com.cosmopolis;
 public class Ville {
 
     Ville(String name) {

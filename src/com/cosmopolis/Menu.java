@@ -1,3 +1,4 @@
+package com.cosmopolis;
 public class Menu {
     Menu() {
         System.out.println("  _____                                      _ _     ");
