@@ -1,4 +1,5 @@
 package batiments;
+
 public abstract class Batiment {
     private int price;
     private int minhab;
