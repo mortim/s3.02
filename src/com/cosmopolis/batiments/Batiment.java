@@ -1,4 +1,5 @@
-package batiments;
+package com.cosmopolis.batiments;
+
 public abstract class Batiment {
     private int price;
     private int minhab;
