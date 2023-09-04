@@ -13,7 +13,7 @@ public class Ville {
     /**
      * Le nombre total d'argents
      */
-    private int money = 0;
+    private float money = 0;
 
     /**
      * Le nombre total d'argents depensés
@@ -55,11 +55,11 @@ public class Ville {
         this.week = week;
     }
 
-    public int getMoney() {
+    public float getMoney() {
         return money;
     }
 
-    public void setMoney(int money) {
+    public void setMoney(float money) {
         this.money = money;
     }
 
@@ -136,6 +136,14 @@ public class Ville {
     }
 
     public String toString() {
-        return "Ville de " + getName() + " avec " + getResidents() + " habitants, " + getMoney() + "$";
+        return "Ville de " + getName() + ", Semaine " + getWeek() + " avec " + getResidents() + " habitants, " + getMoney() + "$";
+    }
+
+    public void addMoney(float amount) {
+        setMoney(getMoney() + amount);
+    }
+
+    public void incrementWeek() {
+        setWeek(getWeek() + 1);
     }
 }
