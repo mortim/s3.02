@@ -171,7 +171,7 @@ public class Ville {
         if (this.money >= batiment.getPrice()) {
             this.bats.add(batiment);
             Random rd = new Random();
-            setResidents((batiment.getMinhab() + rd.nextInt(batiment.getMaxhab() - batiment.getMinhab())) + getResidents());
+            setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
             removeMoney(batiment.getPrice());
             return true;
         } else
