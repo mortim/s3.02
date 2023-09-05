@@ -1,5 +1,9 @@
 package com.cosmopolis;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,45 +15,50 @@ import com.cosmopolis.batiments.IndustrieBatiment;
 import com.cosmopolis.batiments.LaboratoireBatiment;
 import com.cosmopolis.batiments.MaisonBatiment;
 
-public class Ville {
-
-    public Ville(String name) {
-        this.name = name;
-    }
+public class Ville implements Serializable {
 
     private String name;
 
     /**
      * Le nombre de semaines depuis le début de la partie
      */
-    private int week = 0;
+    private int week;
 
     /**
      * Le nombre total d'argents
      */
-    private float money = 0;
+    private float money;
 
     /**
      * Le nombre total d'argents depensés
      */
-    private int totalMoneySpent = 0;
+    private int totalMoneySpent;
 
     /**
      * Le nombre total d'habitants
      */
-    private int residents = 0;
+    private int residents;
 
-    private double popularity = 0.5;
+    private double popularity;
 
     /**
-    public ArrayList<Batiment> getBats() {
-        return bats;
-    }
-
      * Le nombre de points de recherches du joueur
      */
+    private int research;
 
-    
+    // Liste des bâtiments
+    private ArrayList<Batiment> bats = new ArrayList<>();
+
+    public Ville(String name) {
+        this.name = name;
+        this.week = 0;
+        this.money = 0;
+        this.totalMoneySpent = 0;
+        this.residents = 0;
+        this.popularity = 0.5;
+        this.research = 0;
+    }
+
     public double getPopularity() {
         return popularity;
     }
@@ -58,14 +67,6 @@ public class Ville {
         this.popularity = popularity;
     }
         
-
-    /**
-     * Le nombre de points de recherches du joueur
-     */
-    private int research = 0;
-
-    private ArrayList<Batiment> bats = new ArrayList<>();
-
     public String getName() {
         return name;
     }
@@ -78,7 +79,6 @@ public class Ville {
         this.name = name;
     }
     
-
     public int getWeek() {
         return week;
     }
@@ -119,50 +119,10 @@ public class Ville {
         this.research = research;
     }
 
-    public int getTotalHouses() {
+    public int getTotalBatiments(String batiment) {
         int tmp = 0;
         for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new MaisonBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalShops() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new CommerceBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalBuildings() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new ImmeubleBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalFactories() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new IndustrieBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalSchools() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new EcoleBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalLaboratories() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new LaboratoireBatiment().getClass())) tmp++;
+            if(this.bats.get(i).getClass().getSimpleName().equals(batiment)) tmp++;
         }
         return tmp;
     }
@@ -209,5 +169,28 @@ public class Ville {
             return true;
         } else
             return false;
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeObject(this.name);
+        out.writeObject(this.week);
+        out.writeObject(this.money);
+        out.writeObject(this.totalMoneySpent);
+        out.writeObject(this.residents);
+        out.writeObject(this.popularity);
+        out.writeObject(this.research);
+        out.writeObject(this.bats);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        this.name = (String)in.readObject();
+        this.week = (int)in.readObject();
+        this.money = (float)in.readObject();
+        this.totalMoneySpent = (int)in.readObject();
+        this.residents = (int)in.readObject();
+        this.popularity = (double)in.readObject();
+        this.research = (int)in.readObject();
+        this.bats = (ArrayList<Batiment>)in.readObject();
     }
 }
