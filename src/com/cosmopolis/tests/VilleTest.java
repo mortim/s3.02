@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import com.cosmopolis.Ville;
 import com.cosmopolis.batiments.Batiment;
 import com.cosmopolis.batiments.IndustrieBatiment;
-import com.cosmopolis.batiments.MaisonBatiment;
 
 public class VilleTest {
 

@@ -1,8 +1,6 @@
 package com.cosmopolis;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import com.cosmopolis.batiments.Batiment;
@@ -44,11 +42,13 @@ public class Ville {
     private double popularity = 0.5;
 
     /**
+    public ArrayList<Batiment> getBats() {
+        return bats;
+    }
+
      * Le nombre de points de recherches du joueur
      */
-    private int research = 0;
 
-    private ArrayList<Batiment> bats = new ArrayList<>();
     
     public double getPopularity() {
         return popularity;
@@ -58,11 +58,18 @@ public class Ville {
         this.popularity = popularity;
     }
         
+
+    /**
+     * Le nombre de points de recherches du joueur
+     */
+    private int research = 0;
+
+    private ArrayList<Batiment> bats = new ArrayList<>();
+
     public String getName() {
         return name;
     }
     
-
     public ArrayList<Batiment> getBats() {
         return bats;
     }
@@ -161,7 +168,8 @@ public class Ville {
     }
 
     public String toString() {
-        return "Ville de " + getName() + ", Semaine " + getWeek() + " avec " + getResidents() + " habitants, " + getMoney() + "$";
+        return "Ville de " + getName() + ", Semaine " + getWeek() + " avec " + getResidents() + " habitants, "
+                + getMoney() + "$";
     }
 
     public void addMoney(float amount) {
@@ -173,7 +181,7 @@ public class Ville {
     }
 
     public void removeMoney(float amount){
-        setMoney(getMoney() - amount);
+        setMoney(money - amount);
     }
 
     public boolean buy(int choice) {
