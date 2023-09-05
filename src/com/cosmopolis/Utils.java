@@ -2,9 +2,13 @@ package com.cosmopolis;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Utils {
+
+    public static final int SCREEN_WIDTH = 80;
 
     public static final String RESET = "\033[0m";  // Text Reset
 
@@ -47,9 +51,36 @@ public class Utils {
     public static final String CYAN_BACKGROUND = "\u001B[46m";
     public static final String WHITE_BACKGROUND = "\u001B[47m";
 
+    /**
+     * @param residents Le nombre total d'habitants
+     * @return Renvoie le nombre total d'argents gagnés par un clic.
+     */
+    public static float getIncomeForWeek(int residents) {
+        return (float) residents;
+    }
+    
+    /**
+     * @param residents Le nombre total d'habitants
+     * @return Renvoie le nombre total d'argents gagnés par un clic.
+     */
+    public static float getIncomeForClick(int residents) {
+        return (float) (residents * 0.5);
+    }
+
     public static float getBuildingPrice(int basePrice, int count) {
         return (float) (basePrice * Math.pow(1.15, count));
     }
+
+
+    public static void printTxt(String path) throws IOException {
+        Scanner input = new Scanner(new FileReader(path));
+        while (input.hasNextLine())
+        {
+           System.out.print("\r" + input.nextLine() + "\r\n");
+        }
+    }
+
+
 
     public static String lireFichier(String filepath) throws FileNotFoundException {
         String output = "";

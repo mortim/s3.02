@@ -2,20 +2,20 @@ package com.cosmopolis.batiments;
 
 public abstract class Batiment {
     private float price;
-    private int minhab;
-    private int maxhab;
+    private int min_residents;
+    private int max_residents;
     private int landing;
 
     /**
      * @param price Prix du bâtiment
-     * @param minhab Nombre minimum d'habitants
-     * @param maxhab Nombre maximum d'habitants
+     * @param min_residents Nombre minimum d'habitants
+     * @param max_residents Nombre maximum d'habitants
      * @param landing Palier en nombre d'habitants
      */
-    public Batiment(int price, int minhab, int maxhab, int landing) {
+    public Batiment(int price, int min_residents, int max_residents, int landing) {
         this.price = price;
-        this.minhab = minhab;
-        this.maxhab = maxhab;
+        this.min_residents = min_residents;
+        this.max_residents = max_residents;
         this.landing = landing;
     }
 
@@ -32,28 +32,28 @@ public abstract class Batiment {
         this.price = price;
     }
 
-    public int getMinhab() {
-        return minhab;
+    public int getMinResidents() {
+        return min_residents;
     }
 
-    public int getMaxhab() {
-        return maxhab;
+    public int getMaxResidents() {
+        return max_residents;
     }
 
-    public void setHab(int min, int max) {
-        this.minhab = min;
-        this.maxhab = max;
+    public void setResidents(int min, int max) {
+        this.min_residents = min;
+        this.max_residents = max;
     }
 
     public int getLanding() {
         return landing;
     }
 
-    public void setMinMaxHab(int minhab, int maxhab) {
-        this.minhab = minhab;
-        this.maxhab = maxhab;
+    public void setMinMaxResidents(int min_residents, int max_residents) {
+        this.min_residents = min_residents;
+        this.max_residents = max_residents;
     }    
     public String toString() {
-        return this.getClass().getSimpleName() + "(prix=" + this.price + ", minhab=" + this.minhab + ", maxhab=" + this.maxhab + ", palier=" + this.landing + ")";
+        return this.getClass().getSimpleName() + "(prix=" + this.price + ", min_residents=" + this.min_residents + ", max_residents=" + this.max_residents + ", palier=" + this.landing + ")";
     }
 }

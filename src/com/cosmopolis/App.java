@@ -1,9 +1,15 @@
 package com.cosmopolis;
 
-public class App {
-    public static void main(String[] args) throws InterruptedException {
+import java.io.IOException;
+
+import com.cosmopolis.interfaces.Menu;
+
+public class App extends Controls {
+    public static void main(String[] args) throws InterruptedException, IOException {
         // Menu du jeu
-        Menu menu = new Menu();
-        Jeu jeu = new Jeu();
+        new Menu();
+
+        // Jeu
+        new Jeu();
     }
 }

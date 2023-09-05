@@ -1,5 +1,6 @@
-package com.cosmopolis;
+package com.cosmopolis.evenements;
 
+import com.cosmopolis.Ville;
 
 import java.util.Random;
 
@@ -8,7 +9,7 @@ public class RandomEvent {
     Random random = new Random();
     private Ville ville;
     private int addHabitants=0;
-    private String message;
+    private String message="";
 
     public RandomEvent(int hab, String msg, Ville ville){
         this.addHabitants=hab;
@@ -21,7 +22,8 @@ public class RandomEvent {
 
 
     public String createEvent(double i1, double i2, String msg){
-        double v0 = ville.getResidents() * i1 + (random.nextDouble() - (i2 - i1));
+        
+        double v0 = ville.getResidents()* i1 + (random.nextDouble() + (i2 - i1));
         int variable = (int) v0;
         ville.setResidents(variable);
         return msg;

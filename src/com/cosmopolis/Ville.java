@@ -41,6 +41,15 @@ public class Ville {
 
     private double popularity = 0.5;
 
+    /**
+    public ArrayList<Batiment> getBats() {
+        return bats;
+    }
+
+     * Le nombre de points de recherches du joueur
+     */
+
+    
     public double getPopularity() {
         return popularity;
     }
@@ -48,6 +57,7 @@ public class Ville {
     public void setPopularity(double popularity) {
         this.popularity = popularity;
     }
+        
 
     /**
      * Le nombre de points de recherches du joueur
@@ -59,7 +69,7 @@ public class Ville {
     public String getName() {
         return name;
     }
-
+    
     public ArrayList<Batiment> getBats() {
         return bats;
     }
@@ -67,11 +77,12 @@ public class Ville {
     public void setName(String name) {
         this.name = name;
     }
+    
 
     public int getWeek() {
         return week;
     }
-
+    
     public void setWeek(int week) {
         this.week = week;
     }
@@ -193,7 +204,7 @@ public class Ville {
         if (this.money >= batiment.getPrice()) {
             this.bats.add(batiment);
             Random rd = new Random();
-            setResidents((batiment.getMinhab() + rd.nextInt(batiment.getMaxhab() - batiment.getMinhab())) + getResidents());
+            setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
             removeMoney(batiment.getPrice());
             return true;
         } else
