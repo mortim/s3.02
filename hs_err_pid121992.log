@@ -1,0 +1,419 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Cannot create worker GC thread. Out of system resources.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   The process is running with CompressedOops enabled, and the Java Heap may be blocking the growth of the native heap
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+#   JVM is running with Zero Based Compressed Oops mode in which the Java heap is
+#     placed in the first 32GB address space. The Java Heap base address is the
+#     maximum limit for the native heap growth. Please use -XX:HeapBaseMinAddress
+#     to set the Java Heap base and to place the Java Heap above 32GB virtual address.
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (workerManager.hpp:87), pid=121992, tid=121993
+#
+# JRE version:  (17.0.7+7) (build )
+# Java VM: OpenJDK 64-Bit Server VM (17.0.7+7, mixed mode, sharing, tiered, compressed oops, compressed class ptrs, g1 gc, linux-amd64)
+# No core dump will be written. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dapplication.home=/home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64 -Xms8m -Djdk.module.main=jdk.jcmd jdk.jcmd/sun.tools.jcmd.JCmd 6481 VM.uptime
+
+Host: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz, 12 cores, 15G, Debian GNU/Linux 11 (bullseye)
+Time: Tue Sep  5 10:30:26 2023 CEST elapsed time: 0.036944 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fd7d8027040):  JavaThread "Unknown thread" [_thread_in_vm, id=121993, stack(0x00007fd7df534000,0x00007fd7df635000)]
+
+Stack: [0x00007fd7df534000,0x00007fd7df635000],  sp=0x00007fd7df6335d0,  free space=1021k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xee1661]  VMError::report_and_die(int, char const*, char const*, __va_list_tag*, Thread*, unsigned char*, void*, void*, char const*, int, unsigned long)+0x1a1
+V  [libjvm.so+0xee222d]  VMError::report_and_die(Thread*, char const*, int, unsigned long, VMErrorType, char const*, __va_list_tag*)+0x2d
+V  [libjvm.so+0x608ecc]  report_vm_out_of_memory(char const*, int, unsigned long, VMErrorType, char const*, ...)+0xdc
+V  [libjvm.so+0xf14fbf]  WorkerManager::add_workers(WorkGang*, unsigned int, unsigned int, unsigned int, os::ThreadType, bool)+0x18f
+V  [libjvm.so+0xf1515a]  WorkGang::initialize_workers()+0x4a
+V  [libjvm.so+0x700e23]  G1ConcurrentMark::G1ConcurrentMark(G1CollectedHeap*, G1RegionToSpaceMapper*, G1RegionToSpaceMapper*)+0x553
+V  [libjvm.so+0x6ef83c]  G1CollectedHeap::initialize()+0x70c
+V  [libjvm.so+0xe90462]  universe_init()+0xd2
+V  [libjvm.so+0x7fb0f7]  init_globals()+0x37
+V  [libjvm.so+0xe678a7]  Threads::create_vm(JavaVMInitArgs*, bool*)+0x387
+V  [libjvm.so+0x8b99a2]  JNI_CreateJavaVM+0x52
+C  [libjli.so+0x4a0f]  JavaMain+0x8f
+C  [libjli.so+0x8d09]  ThreadJavaMain+0x9
+
+
+---------------  P R O C E S S  ---------------
+
+Threads class SMR info:
+_java_thread_list=0x00007fd7e0abf9c0, length=0, elements={
+}
+
+Java Threads: ( => current thread )
+
+Other Threads:
+  0x00007fd7d8090e80 GCTaskThread "GC Thread#0" [stack: 0x00007fd7beff5000,0x00007fd7bf0f5000] [id=121994]
+
+[error occurred during error reporting (printing all threads), id 0xb, SIGSEGV (0xb) at pc=0x00007fd7dfe7f170]
+
+VM state: not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007fd7d80231e0] Heap_lock - owner thread: 0x00007fd7d8027040
+
+Heap address: 0x0000000709400000, size: 3948 MB, Compressed Oops mode: Zero based, Oop shift amount: 3
+
+CDS archive(s) mapped at: [0x0000000000000000-0x0000000000000000-0x0000000000000000), size 0, SharedBaseAddress: 0x0000000800000000, ArchiveRelocationMode: 0.
+Narrow klass base: 0x0000000000000000, Narrow klass shift: 0, Narrow klass range: 0x0
+
+GC Precious Log:
+<Empty>
+
+Heap:
+ garbage-first heap   total 0K, used 0K [0x0000000709400000, 0x0000000800000000)
+  region size 2048K, 0 young (0K), 0 survivors (0K)
+
+[error occurred during error reporting (printing heap information), id 0xb, SIGSEGV (0xb) at pc=0x00007fd7e0440b8a]
+
+GC Heap History (0 events):
+No events
+
+Dll operation events (1 events):
+Event: 0.008 Loaded shared library /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjava.so
+
+Deoptimization events (0 events):
+No events
+
+Classes unloaded (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+VM Operations (0 events):
+No events
+
+Events (1 events):
+Event: 0.007 Protecting memory [0x00007fd7df534000,0x00007fd7df538000] with protection modes 0
+
+
+Dynamic libraries:
+709400000-800000000 ---p 00000000 00:00 0 
+5632f4f37000-5632f4f38000 r--p 00000000 00:33 131925088                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/bin/jcmd
+5632f4f38000-5632f4f39000 r-xp 00001000 00:33 131925088                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/bin/jcmd
+5632f4f39000-5632f4f3a000 r--p 00002000 00:33 131925088                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/bin/jcmd
+5632f4f3a000-5632f4f3b000 r--p 00002000 00:33 131925088                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/bin/jcmd
+5632f4f3b000-5632f4f3c000 rw-p 00003000 00:33 131925088                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/bin/jcmd
+5632f52b6000-5632f52fd000 rw-p 00000000 00:00 0                          [heap]
+7fd7b8000000-7fd7b8021000 rw-p 00000000 00:00 0 
+7fd7b8021000-7fd7bc000000 ---p 00000000 00:00 0 
+7fd7beb03000-7fd7beef1000 rw-p 00000000 00:00 0 
+7fd7beef1000-7fd7beef2000 ---p 00000000 00:00 0 
+7fd7beef2000-7fd7beff3000 rw-p 00000000 00:00 0 
+7fd7beff3000-7fd7beff4000 ---p 00000000 00:00 0 
+7fd7beff4000-7fd7bf175000 rw-p 00000000 00:00 0 
+7fd7bf175000-7fd7c83f7000 ---p 00000000 00:00 0 
+7fd7c83f7000-7fd7c8e06000 rw-p 00000000 00:00 0 
+7fd7c8e06000-7fd7c8eec000 ---p 00000000 00:00 0 
+7fd7c8eec000-7fd7c8ef1000 rw-p 00000000 00:00 0 
+7fd7c8ef1000-7fd7c8fd7000 ---p 00000000 00:00 0 
+7fd7c8fd7000-7fd7c9247000 rwxp 00000000 00:00 0 
+7fd7c9247000-7fd7d050e000 ---p 00000000 00:00 0 
+7fd7d050e000-7fd7d077e000 rwxp 00000000 00:00 0 
+7fd7d077e000-7fd7d0aa0000 ---p 00000000 00:00 0 
+7fd7d0aa0000-7fd7d0d10000 rwxp 00000000 00:00 0 
+7fd7d0d10000-7fd7d7fd7000 ---p 00000000 00:00 0 
+7fd7d7fd7000-7fd7d7fe4000 r--p 00000000 00:33 131925949                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjava.so
+7fd7d7fe4000-7fd7d7ff6000 r-xp 0000d000 00:33 131925949                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjava.so
+7fd7d7ff6000-7fd7d7ffc000 r--p 0001f000 00:33 131925949                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjava.so
+7fd7d7ffc000-7fd7d7ffd000 ---p 00025000 00:33 131925949                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjava.so
+7fd7d7ffd000-7fd7d7ffe000 r--p 00025000 00:33 131925949                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjava.so
+7fd7d7ffe000-7fd7d7fff000 rw-p 00026000 00:33 131925949                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjava.so
+7fd7d7fff000-7fd7d8000000 rw-p 00000000 00:00 0 
+7fd7d8000000-7fd7d80b2000 rw-p 00000000 00:00 0 
+7fd7d80b2000-7fd7dc000000 ---p 00000000 00:00 0 
+7fd7dc016000-7fd7dc01b000 rw-p 00000000 00:00 0 
+7fd7dc01b000-7fd7dc022000 ---p 00000000 00:00 0 
+7fd7dc022000-7fd7dc02a000 rw-s 00000000 103:02 3932197                   /tmp/hsperfdata_aymeri.tourneur.etu/121992 (deleted)
+7fd7dc02a000-7fd7dc8fe000 r--s 00000000 103:02 1310791                   /var/lib/sss/mc/passwd
+7fd7dc8fe000-7fd7df514000 r--s 00000000 00:33 131926334                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/modules
+7fd7df514000-7fd7df518000 r--p 00000000 00:33 131925995                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjimage.so
+7fd7df518000-7fd7df52b000 r-xp 00004000 00:33 131925995                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjimage.so
+7fd7df52b000-7fd7df531000 r--p 00017000 00:33 131925995                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjimage.so
+7fd7df531000-7fd7df533000 r--p 0001c000 00:33 131925995                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjimage.so
+7fd7df533000-7fd7df534000 rw-p 0001e000 00:33 131925995                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjimage.so
+7fd7df534000-7fd7df538000 ---p 00000000 00:00 0 
+7fd7df538000-7fd7df635000 rw-p 00000000 00:00 0 
+7fd7df635000-7fd7df642000 r--p 00000000 103:02 132749                    /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7fd7df642000-7fd7df6dc000 r-xp 0000d000 103:02 132749                    /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7fd7df6dc000-7fd7df777000 r--p 000a7000 103:02 132749                    /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7fd7df777000-7fd7df778000 r--p 00141000 103:02 132749                    /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7fd7df778000-7fd7df779000 rw-p 00142000 103:02 132749                    /usr/lib/x86_64-linux-gnu/libm-2.31.so
+7fd7df779000-7fd7df77b000 r--p 00000000 103:02 132760                    /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7fd7df77b000-7fd7df77f000 r-xp 00002000 103:02 132760                    /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7fd7df77f000-7fd7df781000 r--p 00006000 103:02 132760                    /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7fd7df781000-7fd7df782000 r--p 00007000 103:02 132760                    /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7fd7df782000-7fd7df783000 rw-p 00008000 103:02 132760                    /usr/lib/x86_64-linux-gnu/librt-2.31.so
+7fd7df783000-7fd7df9d5000 r--p 00000000 00:33 131926389                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/server/libjvm.so
+7fd7df9d5000-7fd7e06f5000 r-xp 00252000 00:33 131926389                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/server/libjvm.so
+7fd7e06f5000-7fd7e0981000 r--p 00f72000 00:33 131926389                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/server/libjvm.so
+7fd7e0981000-7fd7e0982000 ---p 011fe000 00:33 131926389                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/server/libjvm.so
+7fd7e0982000-7fd7e0a3b000 r--p 011fe000 00:33 131926389                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/server/libjvm.so
+7fd7e0a3b000-7fd7e0a70000 rw-p 012b7000 00:33 131926389                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/server/libjvm.so
+7fd7e0a70000-7fd7e0acc000 rw-p 00000000 00:00 0 
+7fd7e0acc000-7fd7e0aee000 r--p 00000000 103:02 132747                    /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7fd7e0aee000-7fd7e0c47000 r-xp 00022000 103:02 132747                    /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7fd7e0c47000-7fd7e0c96000 r--p 0017b000 103:02 132747                    /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7fd7e0c96000-7fd7e0c9a000 r--p 001c9000 103:02 132747                    /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7fd7e0c9a000-7fd7e0c9c000 rw-p 001cd000 103:02 132747                    /usr/lib/x86_64-linux-gnu/libc-2.31.so
+7fd7e0c9c000-7fd7e0ca0000 rw-p 00000000 00:00 0 
+7fd7e0ca0000-7fd7e0ca1000 r--p 00000000 103:02 132748                    /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7fd7e0ca1000-7fd7e0ca3000 r-xp 00001000 103:02 132748                    /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7fd7e0ca3000-7fd7e0ca4000 r--p 00003000 103:02 132748                    /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7fd7e0ca4000-7fd7e0ca5000 r--p 00003000 103:02 132748                    /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7fd7e0ca5000-7fd7e0ca6000 rw-p 00004000 103:02 132748                    /usr/lib/x86_64-linux-gnu/libdl-2.31.so
+7fd7e0ca6000-7fd7e0cac000 r--p 00000000 103:02 132758                    /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7fd7e0cac000-7fd7e0cbc000 r-xp 00006000 103:02 132758                    /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7fd7e0cbc000-7fd7e0cc2000 r--p 00016000 103:02 132758                    /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7fd7e0cc2000-7fd7e0cc3000 r--p 0001b000 103:02 132758                    /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7fd7e0cc3000-7fd7e0cc4000 rw-p 0001c000 103:02 132758                    /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+7fd7e0cc4000-7fd7e0cc8000 rw-p 00000000 00:00 0 
+7fd7e0cc8000-7fd7e0ccb000 r--p 00000000 00:33 131926001                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjli.so
+7fd7e0ccb000-7fd7e0cd5000 r-xp 00003000 00:33 131926001                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjli.so
+7fd7e0cd5000-7fd7e0cd8000 r--p 0000d000 00:33 131926001                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjli.so
+7fd7e0cd8000-7fd7e0cd9000 ---p 00010000 00:33 131926001                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjli.so
+7fd7e0cd9000-7fd7e0cda000 r--p 00010000 00:33 131926001                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjli.so
+7fd7e0cda000-7fd7e0cdb000 rw-p 00011000 00:33 131926001                  /home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64/lib/libjli.so
+7fd7e0cdb000-7fd7e0cde000 r--p 00000000 103:02 135714                    /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7fd7e0cde000-7fd7e0cef000 r-xp 00003000 103:02 135714                    /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7fd7e0cef000-7fd7e0cf5000 r--p 00014000 103:02 135714                    /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7fd7e0cf5000-7fd7e0cf6000 ---p 0001a000 103:02 135714                    /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7fd7e0cf6000-7fd7e0cf7000 r--p 0001a000 103:02 135714                    /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7fd7e0cf7000-7fd7e0cf8000 rw-p 0001b000 103:02 135714                    /usr/lib/x86_64-linux-gnu/libz.so.1.2.11
+7fd7e0cf8000-7fd7e0cfa000 r--p 00000000 103:02 175520                    /usr/lib/x86_64-linux-gnu/libnss_sss.so.2
+7fd7e0cfa000-7fd7e0d01000 r-xp 00002000 103:02 175520                    /usr/lib/x86_64-linux-gnu/libnss_sss.so.2
+7fd7e0d01000-7fd7e0d03000 r--p 00009000 103:02 175520                    /usr/lib/x86_64-linux-gnu/libnss_sss.so.2
+7fd7e0d03000-7fd7e0d04000 r--p 0000a000 103:02 175520                    /usr/lib/x86_64-linux-gnu/libnss_sss.so.2
+7fd7e0d04000-7fd7e0d05000 rw-p 0000b000 103:02 175520                    /usr/lib/x86_64-linux-gnu/libnss_sss.so.2
+7fd7e0d05000-7fd7e0d07000 r--p 00000000 103:02 132753                    /usr/lib/x86_64-linux-gnu/libnss_compat-2.31.so
+7fd7e0d07000-7fd7e0d0d000 r-xp 00002000 103:02 132753                    /usr/lib/x86_64-linux-gnu/libnss_compat-2.31.so
+7fd7e0d0d000-7fd7e0d0e000 r--p 00008000 103:02 132753                    /usr/lib/x86_64-linux-gnu/libnss_compat-2.31.so
+7fd7e0d0e000-7fd7e0d0f000 ---p 00009000 103:02 132753                    /usr/lib/x86_64-linux-gnu/libnss_compat-2.31.so
+7fd7e0d0f000-7fd7e0d10000 r--p 00009000 103:02 132753                    /usr/lib/x86_64-linux-gnu/libnss_compat-2.31.so
+7fd7e0d10000-7fd7e0d11000 rw-p 0000a000 103:02 132753                    /usr/lib/x86_64-linux-gnu/libnss_compat-2.31.so
+7fd7e0d11000-7fd7e0d12000 ---p 00000000 00:00 0 
+7fd7e0d12000-7fd7e0d13000 r--p 00000000 00:00 0 
+7fd7e0d13000-7fd7e0d15000 rw-p 00000000 00:00 0 
+7fd7e0d15000-7fd7e0d16000 r--p 00000000 103:02 132743                    /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7fd7e0d16000-7fd7e0d36000 r-xp 00001000 103:02 132743                    /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7fd7e0d36000-7fd7e0d3e000 r--p 00021000 103:02 132743                    /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7fd7e0d3e000-7fd7e0d3f000 ---p 00000000 00:00 0 
+7fd7e0d3f000-7fd7e0d40000 r--p 00029000 103:02 132743                    /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7fd7e0d40000-7fd7e0d41000 rw-p 0002a000 103:02 132743                    /usr/lib/x86_64-linux-gnu/ld-2.31.so
+7fd7e0d41000-7fd7e0d42000 rw-p 00000000 00:00 0 
+7ffe5cfe6000-7ffe5d008000 rw-p 00000000 00:00 0                          [stack]
+7ffe5d1a9000-7ffe5d1ad000 r--p 00000000 00:00 0                          [vvar]
+7ffe5d1ad000-7ffe5d1af000 r-xp 00000000 00:00 0                          [vdso]
+
+
+VM Arguments:
+jvm_args: -Dapplication.home=/home/infoetu/aymeri.tourneur.etu/.vscode/extensions/redhat.java-1.21.0-linux-x64/jre/17.0.7-linux-x86_64 -Xms8m -Djdk.module.main=jdk.jcmd 
+java_command: jdk.jcmd/sun.tools.jcmd.JCmd 6481 VM.uptime
+java_class_path (initial): <not set>
+Launcher Type: SUN_STANDARD
+
+[Global flags]
+     intx CICompilerCount                          = 4                                         {product} {ergonomic}
+     uint ConcGCThreads                            = 3                                         {product} {ergonomic}
+     uint G1ConcRefinementThreads                  = 10                                        {product} {ergonomic}
+   size_t G1HeapRegionSize                         = 2097152                                   {product} {ergonomic}
+    uintx GCDrainStackTargetSize                   = 64                                        {product} {ergonomic}
+   size_t InitialHeapSize                          = 8388608                                   {product} {command line}
+   size_t MarkStackSize                            = 4194304                                   {product} {ergonomic}
+   size_t MaxHeapSize                              = 4139778048                                {product} {ergonomic}
+   size_t MinHeapDeltaBytes                        = 2097152                                   {product} {ergonomic}
+   size_t MinHeapSize                              = 8388608                                   {product} {command line}
+    uintx NonNMethodCodeHeapSize                   = 5839372                                {pd product} {ergonomic}
+    uintx NonProfiledCodeHeapSize                  = 122909434                              {pd product} {ergonomic}
+    uintx ProfiledCodeHeapSize                     = 122909434                              {pd product} {ergonomic}
+    uintx ReservedCodeCacheSize                    = 251658240                              {pd product} {ergonomic}
+     bool SegmentedCodeCache                       = true                                      {product} {ergonomic}
+   size_t SoftMaxHeapSize                          = 4139778048                             {manageable} {ergonomic}
+     bool UseCompressedClassPointers               = true                           {product lp64_product} {ergonomic}
+     bool UseCompressedOops                        = true                           {product lp64_product} {ergonomic}
+     bool UseG1GC                                  = true                                      {product} {ergonomic}
+
+Logging:
+Log output configuration:
+ #0: stdout all=warning uptime,level,tags
+ #1: stderr all=off uptime,level,tags
+
+Environment Variables:
+PATH=/home/public/vm/bin:/opt/spring-3.1.1//bin:/opt/Kathara/bin:/usr/local/netkit-ng/bin:/home/public/admin/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/public/graphes/Grapp/bin
+SHELL=/bin/bash
+DISPLAY=:0.0
+LANG=fr_FR.UTF-8
+TERM=xterm-256color
+
+Active Locale:
+LC_ALL=C
+LC_COLLATE=C
+LC_CTYPE=C
+LC_MESSAGES=C
+LC_MONETARY=C
+LC_NUMERIC=C
+LC_TIME=C
+
+Signal Handlers:
+   SIGSEGV: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGBUS: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+    SIGFPE: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGPIPE: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGXFSZ: javaSignalHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGILL: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+   SIGUSR2: SR_handler in libjvm.so, mask=00000000000000000000000000000000, flags=SA_RESTART|SA_SIGINFO, blocked
+    SIGHUP: SIG_DFL, mask=00000000000000000000000000000000, flags=none, blocked
+    SIGINT: SIG_DFL, mask=00000000000000000000000000000000, flags=none, blocked
+   SIGTERM: SIG_DFL, mask=00000000000000000000000000000000, flags=none, blocked
+   SIGQUIT: UserHandler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, blocked
+   SIGTRAP: crash_handler in libjvm.so, mask=11100100010111111101111111111110, flags=SA_RESTART|SA_SIGINFO, unblocked
+
+
+---------------  S Y S T E M  ---------------
+
+OS:
+PRETTY_NAME="Debian GNU/Linux 11 (bullseye)"
+NAME="Debian GNU/Linux"
+VERSION_ID="11"
+VERSION="11 (bullseye)"
+VERSION_CODENAME=bullseye
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+uname: Linux 5.10.0-23-amd64 #1 SMP Debian 5.10.179-1 (2023-05-12) x86_64
+OS uptime: 0 days 3:28 hours
+libc: glibc 2.31 NPTL 2.31 
+rlimit (soft/hard): STACK 8192k/infinity , CORE 0k/infinity , NPROC 4096/4096 , NOFILE 1048576/1048576 , AS infinity/infinity , CPU infinity/infinity , DATA infinity/infinity , FSIZE infinity/infinity , MEMLOCK 2021303k/2021303k
+load average: 0.54 0.40 0.56
+
+/proc/meminfo:
+MemTotal:       16170428 kB
+MemFree:         9788096 kB
+MemAvailable:   11335260 kB
+Buffers:           79828 kB
+Cached:          2178768 kB
+SwapCached:            0 kB
+Active:           767868 kB
+Inactive:        4710440 kB
+Active(anon):       3192 kB
+Inactive(anon):  3727324 kB
+Active(file):     764676 kB
+Inactive(file):   983116 kB
+Unevictable:      427128 kB
+Mlocked:              64 kB
+SwapTotal:      15999996 kB
+SwapFree:       15999996 kB
+Dirty:                88 kB
+Writeback:             0 kB
+AnonPages:       3583668 kB
+Mapped:           797624 kB
+Shmem:            510804 kB
+KReclaimable:     113572 kB
+Slab:             252356 kB
+SReclaimable:     113572 kB
+SUnreclaim:       138784 kB
+KernelStack:       70720 kB
+PageTables:        48740 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    24085208 kB
+Committed_AS:   12412116 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       99204 kB
+VmallocChunk:          0 kB
+Percpu:            14912 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:   1198080 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:      375476 kB
+DirectMap2M:    11999232 kB
+DirectMap1G:     4194304 kB
+
+/sys/kernel/mm/transparent_hugepage/enabled: [always] madvise never
+/sys/kernel/mm/transparent_hugepage/defrag (defrag/compaction efforts parameter): always defer defer+madvise [madvise] never
+
+Process Memory:
+Virtual Size: 4668020K (peak: 4728500K)
+Resident Set Size: 18528K (peak: 18528K) (anon: 6004K, file: 12524K, shmem: 0K)
+Swapped out: 0K
+C-Heap outstanding allocations: 15174K, retained: 277K
+glibc malloc tunables: (default)
+
+/proc/sys/kernel/threads-max (system-wide limit on the number of threads): 125695
+/proc/sys/vm/max_map_count (maximum number of memory map areas a process may have): 65530
+/proc/sys/kernel/pid_max (system-wide limit on number of process identifiers): 4194304
+
+container (cgroup) information:
+container_type: cgroupv2
+cpu_cpuset_cpus: not supported
+cpu_memory_nodes: not supported
+active_processor_count: 12
+cpu_quota: not supported
+cpu_period: not supported
+cpu_shares: not supported
+memory_limit_in_bytes: unlimited
+memory_and_swap_limit_in_bytes: unlimited
+memory_soft_limit_in_bytes: unlimited
+memory_usage_in_bytes: 4690892 k
+memory_max_usage_in_bytes: not supported
+memory_swap_current_in_bytes: unlimited
+memory_swap_max_limit_in_bytes: unlimited
+maximum number of tasks: unlimited
+current number of tasks: 4005
+
+Steal ticks since vm start: 0
+Steal ticks percentage since vm start:  0.000
+
+CPU: total 12 (initial active 12) (6 cores per cpu, 2 threads per core) family 6 model 158 stepping 10 microcode 0xf0, cx8, cmov, fxsr, ht, mmx, 3dnowpref, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, lzcnt, tsc, tscinvbit, avx, avx2, aes, erms, clmul, bmi1, bmi2, rtm, adx, fma, vzeroupper, clflush, clflushopt
+CPU Model and flags from /proc/cpuinfo:
+model name	: Intel(R) Core(TM) i7-8700 CPU @ 3.20GHz
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d arch_capabilities
+
+Online cpus: 0-11
+Offline cpus: 
+BIOS frequency limitation: <Not Available>
+Frequency switch latency (ns): 0
+Available cpu frequencies: <Not Available>
+Current governor: powersave
+Core performance/turbo boost: <Not Available>
+
+Memory: 4k page, physical 16170428k(9788096k free), swap 15999996k(15999996k free)
+Page Sizes: 4k
+
+vm_info: OpenJDK 64-Bit Server VM (17.0.7+7) for linux-amd64 JRE (17.0.7+7), built on Apr 18 2023 00:00:00 by "temurin" with gcc 10.3.0
+
+END.

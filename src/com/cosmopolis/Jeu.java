@@ -1,106 +1,99 @@
 package com.cosmopolis;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 import java.util.Scanner;
 
-import com.cosmopolis.batiments.Batiment;
-import com.cosmopolis.batiments.MaisonBatiment;
+import com.cosmopolis.interfaces.Click;
+import com.cosmopolis.interfaces.Fusee;
+import com.cosmopolis.interfaces.Magasin;
 
-public class Jeu {
+public class Jeu extends Controls {
 
+    /**
+     * La longueur d'une semaine en millisecondes.
+     */
     public final int WEEK_LENGTH = 2500;
+    /**
+     * Le nombre de millisecondes avant le jour suivant.
+     */
+    public int msUntilNextWeek = 0;
 
-    Map<String, Batiment> batiments = new HashMap<String, Batiment>();
+    /**
+     * L'écran sur laquelle le joueur se trouve actuellement (0 = cliquer, 1 = acheter des bâtiments, 2 = envoyer une fusée)
+     */
+    public int screen = 1;
+
+    public Object currentScreen;
+    /**
+     * Les données du joueur
+     */
+    public Ville ville;
+
     
-    Jeu() throws InterruptedException {
-        // map.put("house", new MaisonBatiment());
-        // map.put("house", new MaisonBatiment());
-        // map.put("house", new MaisonBatiment());
-        // map.put("house", new MaisonBatiment());
-        // map.put("house", new MaisonBatiment());
-        // map.put("house", new MaisonBatiment());
-        
-        System.out.println("Entrez un nom à votre ville:");
-        Scanner scanner = new Scanner(System.in);
-        Ville ville = new Ville(scanner.nextLine());
+    Jeu() throws InterruptedException, IOException {
+    
+        // D'abord on demande au joueur de nommer sa ville
+        println("Entrez un nom à votre ville:");
+        try (Scanner scanner = new Scanner(System.in)) {
+            ville = new Ville(scanner.nextLine());
+        }
         ville.setResidents(10);
+        enableKeyTypedInConsole(true);
         while (true) {
-            ville.incrementWeek();
-            ville.addMoney(Semaine.getIncomeForWeek(ville.getResidents()));
-            ville.setResidents(ville.getResidents() + 1);
-            System.out.println("\033\143"); // effacer la console
-            printHeader(ville);
-            System.out.println(Utils.BLACK_BOLD + "                                    +");
-            System.out.println("                                   / \\");
-            System.out.println(" _____        _____     __________/ o \\/\\_________      _________");
-            System.out.println("|o o o|_______|    |___|               | | # # #  |____|o o o o  |  /\\");
-            System.out.println("|o o o|  * * *|: ::|. .|               |o| # # #  |. . |o o o o  | /|\\");
-            System.out.println("|o o o|* * *  |::  |. .| []  []  []  []|o| # # #  |. . |o o o o  |((|))");
-            System.out.println("|o o o|**  ** |:  :|. .| []  []  []    |o| # # #  |. . |o o o o  |((|))");
-            System.out.println("|_[]__|__[]___|_||_|__<|____________;;_|_|___/\\___|_.|_|____[]___|  |");
-            System.out.println(Utils.BLUE_BOLD + ville);
+            clearMyScreen();
 
-            printLabel(1, 10, ville.getTotalHouses(), "maisons");
-            printLabel(2, 50, ville.getTotalShops(), "commerces");
-            printLabel(3, 250, ville.getTotalBuildings(), "immeubles");
-            printLabel(4, 1000, ville.getTotalSchools(), "écoles");
-            printLabel(5, 5000, ville.getTotalFactories(), "industries");
-            printLabel(6, 50000, ville.getTotalLaboratories(), "laboratoires");
+            if(msUntilNextWeek < 0) {
+                ville.incrementWeek();
+                ville.addMoney(Utils.getIncomeForWeek(ville.getResidents()));
+                ville.setResidents(ville.getResidents() + 1);
+                msUntilNextWeek = WEEK_LENGTH;
+            }
+            printHeader("    " + ville.getMoney() + "$", Utils.getIncomeForWeek(ville.getResidents()) / (WEEK_LENGTH / 1000) + "$/s        semaine n°" + ville.getWeek() + "    \r");
+            printHeader("← Cliquer / Ville / Fusée →", "Utilisez les flèches pour changer de menu");
+            
+            switch (screen) {
+                case 0:
+                    new Click();
+                    break;
+                case 1:
+                    new Magasin(ville);
+                    break;
+                case 2:
+                    new Fusee();
+                    break;  
+            }
 
-            printProgressBar("Habitants", 0.1, Utils.GREEN_BACKGROUND, 30);
-            System.out.print("    ");
-            printProgressBar("Recherche", 0.1, Utils.BLUE_BACKGROUND, 30);
-            System.out.println();
-            printProgressBar("Popularité", 0.1, Utils.YELLOW_BACKGROUND, 30);
-
-            // String inputString = scanner.next();
-            // System.out.println(inputString);
-            Thread.sleep(1000);
+            Thread.sleep(100);
+            msUntilNextWeek -= 100;
         }
     }
 
-    private void printProgressBar(String label, double progress, String background, int size) {
-        for (int i = 0; i < size; i++) {
-            if((float) i / (float) size > progress) {
-                System.out.print(Utils.BLACK_BACKGROUND);
-            } else {
-                System.out.print(background);
-
-            }
-            if(i < label.length()) {
-                System.out.print(label.charAt(i));
-            } else {
-                System.out.print(' ');
-            }
-
+    protected void keyTypedInConsole(int keyCode) {
+        switch (keyCode) {
+            case 19:
+                screen--;
+                break;
+            case 20:
+                screen++;
+                break;
+            default:
+                break;
         }
-        System.out.print(Utils.RESET);
+        if(screen == 0 && keyCode == 32) {
+            ville.addMoney(Utils.getIncomeForClick(ville.getResidents()));
+        }
     }
 
-    public void printLabel(int id, int price, int count, String label) {
-        System.out.println(Utils.BLACK + "    [" + id + "] " + Utils.GREEN_BOLD + count + " " + Utils.RESET + label + Utils.BLACK + " (" + (int) Utils.getBuildingPrice(price, count) + "$)" + Utils.RESET);
-    }
 
-    private final int SCREEN_WIDTH = 80;
-
-    public void printHeader(Ville ville) {
-        String left_label = "    " + ville.getMoney() + "$";
-        String right_label =  Semaine.getIncomeForWeek(ville.getResidents()) / (WEEK_LENGTH / 1000) + "$/s        semaine n°" + ville.getWeek() + "    ";
+    /**
+     * @param left_label Le label qui sera affiché à gauche
+     * @param right_label Le label qui sera affiché à droite
+     */
+    public void printHeader(String left_label, String right_label) {
 
         System.out.print(Utils.WHITE_BACKGROUND + left_label);
-        for (int i = 0; i < SCREEN_WIDTH - (left_label.length() + right_label.length()); i++) {
+        for (int i = 0; i < Utils.SCREEN_WIDTH - (left_label.length() + right_label.length()); i++) {
             System.out.print(' ');
         }
         System.out.print(right_label + Utils.RESET + "\n");
-    }
-    
-    public void printAlert(String alert) {
-        System.out.print("\n" + Utils.BLUE_BACKGROUND + " ! " + Utils.WHITE_BACKGROUND + " ");
-
-        System.out.print(Utils.WHITE_BACKGROUND + alert);
-        for (int i = 0; i < SCREEN_WIDTH - (alert.length() + 4); i++) {
-            System.out.print(' ');
-        }
-        System.out.print(Utils.RESET + "\n");
     }
 }

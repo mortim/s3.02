@@ -29,13 +29,6 @@ public class Ville {
     private double popularity = 0.5;
     
 
-    public double getPopularity() {
-        return popularity;
-    }
-
-    public void setPopularity(double popularity) {
-        this.popularity = popularity;
-    }
     /**
      * Le nombre de points de recherches du joueur
      */
@@ -47,20 +40,28 @@ public class Ville {
     private int totalFactories = 0;
     private int totalSchools = 0;
     private int totalLaboratories = 0;
+    
+    public double getPopularity() {
+        return popularity;
+    }
 
+    public void setPopularity(double popularity) {
+        this.popularity = popularity;
+    }
+        
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
-
+    
 
     public int getWeek() {
         return week;
     }
-
+    
     public void setWeek(int week) {
         this.week = week;
     }
