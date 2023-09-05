@@ -30,9 +30,9 @@ public class VilleTest {
     @Test
     void testGetters(){
         v.buy(2);
-        assertEquals(1, v.getTotalShops());
+        assertEquals(1, v.getTotalBatiments("CommerceBatiment"));
         v.buy(1);
-        assertEquals(1, v.getTotalHouses());
+        assertEquals(1, v.getTotalBatiments("MaisonBatiment"));
     }
 
 }
