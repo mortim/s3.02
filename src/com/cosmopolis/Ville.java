@@ -1,8 +1,6 @@
 package com.cosmopolis;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import com.cosmopolis.batiments.Batiment;
