@@ -46,8 +46,17 @@ public class Ville {
      * Le nombre total d'habitants
      */
     private int residents = 0;
+
+    private double popularity = 0.5;
     
 
+    public double getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(double popularity) {
+        this.popularity = popularity;
+    }
     /**
      * Le nombre de points de recherches du joueur
      */
