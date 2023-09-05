@@ -19,34 +19,30 @@ public class RandomEvent {
 
 
 
-    //arrive tous les 7 tours
-    double v0 = ville.getResidents()*random.nextDouble(-1.1,-1.2);
-    int Mourrants = (int) v0;
-    RandomEvent Morts = new RandomEvent(Mourrants,"La vie est courte non ? Certain de vos habitant sont décédés.",ville);
+    public String createEvent(double i1, double i2, String msg){
+        double v0 = ville.getResidents()*random.nextDouble(i1,i2);
+        int variable = (int) v0;
+        ville.setResidents(variable);
+        return msg;
+    }
 
     //arrive tous les 7 tours
-    double v1 = ville.getResidents()*random.nextDouble(1.1,1.4);
-    int Arrivant = (int) v1;
-    RandomEvent Arrivees = new RandomEvent(Arrivant,"Votre ville semble attirer de nouvelles personnes ! De nouveaux Habitants arrivent.",ville);
+    String Arrivant = createEvent(1.1, 1.4, "Votre ville semble attirer de nouvelles personnes ! De nouveaux Habitants arrivent.");
+
+    //arrive tous les 7 tours
+    String Mourrant = createEvent(-1.1, -1.3, "La vie est courte non ? Certain de vos habitant sont décédés.");
 
     //probabilité que ça arrive à chaque tour : 5%
-    double v2 = ville.getResidents()*random.nextDouble(1.8,2.2);
-    int Touristes = (int) v2;
-    RandomEvent Tourisme = new RandomEvent(Touristes,"Votre ville est si belle qu'elle acceuille des touristes ! Attention au facteur de surpopulation.",ville);
+    String Touristes = createEvent(1.8,2.2,"Votre ville est si belle qu'elle acceuille des touristes ! Attention au facteur de surpopulation.");
 
     //arrive si la population qui s'ajoute du tour en jeu est égale à la population du tour précédent
-    double v3 = ville.getResidents()*random.nextDouble(-1.4,-1.8);
-    int Surpopilation = (int) v3;
-    RandomEvent Surpeuplement = new RandomEvent(Touristes,"Votre ville à dépassé son seuil de peuplement. Une grosse mortalité s'en est suivie.",ville);
+    String Surpopulation = createEvent(-1.4,-1.8, "Votre ville à dépassé son seuil de peuplement. Une grosse mortalité s'en est suivie.");
 
-    //probabilité que ça arrive à chaque tour : 5%
-    double v4 = ville.getResidents()*random.nextDouble(-1.2,-1.5);
-    int Tempetes = (int) v4;
-    RandomEvent Tempete = new RandomEvent(Tempetes,"Une Tempete sans précédent vient de toucher votre ville. Les dégâts sont considérables...",ville);
+    //arrive si la population qui s'ajoute du tour en jeu est égale à la population du tour précédent
+    String Tempete = createEvent(-1.2,-1.5,"Une Tempete sans précédent vient de toucher votre ville. Les dégâts sont considérables...");
 
-    //probabilité que ça arrive à chaque tour : 5%
-    double v5 = ville.getResidents()*random.nextDouble(1.4,1.6);
-    int BonVivres = (int) v5;
-    RandomEvent BonVivre = new RandomEvent(BonVivres,"Il fait bon vivre dans votre ville ! De nombreuses personnes décident de s'installer.",ville);
+    //arrive si la population qui s'ajoute du tour en jeu est égale à la population du tour précédent
+    String BonVivre = createEvent(1.4,-1.5,"Il fait bon vivre dans votre ville ! De nombreuses personnes décident de s'installer.");
+
 
 }
