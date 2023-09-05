@@ -1,4 +1,9 @@
 package com.cosmopolis;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class Utils {
 
     public static final String RESET = "\033[0m";  // Text Reset
@@ -44,5 +49,14 @@ public class Utils {
 
     public static float getBuildingPrice(int basePrice, int count) {
         return (float) (basePrice * Math.pow(1.15, count));
+    }
+
+    public static String lireFichier(String filepath) throws FileNotFoundException {
+        String output = "";
+        Scanner sc = new Scanner(new File(filepath));
+        while(sc.hasNextLine())
+            output += sc.nextLine() + "\n";
+        sc.close();
+        return output;
     }
 }
