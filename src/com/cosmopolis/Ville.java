@@ -1,9 +1,30 @@
 package com.cosmopolis;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
+import com.cosmopolis.batiments.Batiment;
+import com.cosmopolis.batiments.CommerceBatiment;
+import com.cosmopolis.batiments.EcoleBatiment;
+import com.cosmopolis.batiments.ImmeubleBatiment;
+import com.cosmopolis.batiments.IndustrieBatiment;
+import com.cosmopolis.batiments.LaboratoireBatiment;
+import com.cosmopolis.batiments.MaisonBatiment;
+
 public class Ville {
 
     Ville(String name) {
         this.name = name;
+        this.batsMap.put(new MaisonBatiment(), 0);
+        this.batsMap.put(new CommerceBatiment(), 0);
+        this.batsMap.put(new ImmeubleBatiment(), 0);
+        this.batsMap.put(new IndustrieBatiment(), 0);
+        this.batsMap.put(new EcoleBatiment(), 0);
+        this.batsMap.put(new LaboratoireBatiment(), 0);
+
     }
+
     private String name;
 
     /**
@@ -20,14 +41,13 @@ public class Ville {
      * Le nombre total d'argents depensés
      */
     private int totalMoneySpent = 0;
-    
+
     /**
      * Le nombre total d'habitants
      */
     private int residents = 0;
 
     private double popularity = 0.5;
-    
 
     public double getPopularity() {
         return popularity;
@@ -36,17 +56,20 @@ public class Ville {
     public void setPopularity(double popularity) {
         this.popularity = popularity;
     }
+
     /**
      * Le nombre de points de recherches du joueur
      */
     private int research = 0;
-    
+
     private int totalHouses = 0;
     private int totalShops = 0;
     private int totalBuildings = 0;
     private int totalFactories = 0;
     private int totalSchools = 0;
     private int totalLaboratories = 0;
+
+    private Map<Batiment, Integer> batsMap = new HashMap<>();
 
     public String getName() {
         return name;
@@ -55,7 +78,6 @@ public class Ville {
     public void setName(String name) {
         this.name = name;
     }
-
 
     public int getWeek() {
         return week;
@@ -112,7 +134,7 @@ public class Ville {
     public void setTotalShops(int totalShops) {
         this.totalShops = totalShops;
     }
-    
+
     public int getTotalBuildings() {
         return totalBuildings;
     }
@@ -146,7 +168,8 @@ public class Ville {
     }
 
     public String toString() {
-        return "Ville de " + getName() + ", Semaine " + getWeek() + " avec " + getResidents() + " habitants, " + getMoney() + "$";
+        return "Ville de " + getName() + ", Semaine " + getWeek() + " avec " + getResidents() + " habitants, "
+                + getMoney() + "$";
     }
 
     public void addMoney(float amount) {
@@ -155,5 +178,27 @@ public class Ville {
 
     public void incrementWeek() {
         setWeek(getWeek() + 1);
+    }
+
+    public boolean buy(int choice) {
+        /*
+         * Maison 1
+         * Commerces 2
+         * Immeuble
+         * Industrie
+         * Laboratoire
+         */
+
+        Batiment batiment = ((Batiment[]) batsMap.keySet().toArray())[choice - 1];
+
+        if (this.money >= batiment.getPrice()) {
+            this.batsMap.put(batiment, this.batsMap.get(batiment) + 1);
+
+            Random rd = new Random();
+            setResidents(
+                    (batiment.getMinhab() + rd.nextInt(batiment.getMaxhab() - batiment.getMinhab())) + getResidents());
+            return true;
+        } else
+            return false;
     }
 }
