@@ -6,7 +6,7 @@ import com.cosmopolis.interfaces.Menu;
 
 public class App extends Controls {
     public static void main(String[] args) throws InterruptedException, IOException {
-        // Menu du jeu
+        // Menu
         new Menu();
 
         // Jeu
