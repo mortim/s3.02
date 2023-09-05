@@ -9,18 +9,11 @@ public class Interactions {
     /**
      * @return Renvoie un int en fonction de la saisie de l'utilisateur.
      */
-    public int voirInput(){
+    public int voirInput() throws NumberFormatException {
         stringScanner = new Scanner(System.in);
         inputString = stringScanner.next();
-        if(inputString.equals("1")){
-            return 1;
-        } else if(inputString.equals("2")){
-            return 2;
-        }else if(inputString.equals("3")){
-            return 3;
-        } else {
-            return 0;
-        }
+        stringScanner.close();
+        return Integer.parseInt(inputString);
     }
 
 }
