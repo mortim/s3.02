@@ -108,50 +108,10 @@ public class Ville {
         this.research = research;
     }
 
-    public int getTotalHouses() {
+    public int getTotalBatiments(String name) {
         int tmp = 0;
         for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new MaisonBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalShops() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new CommerceBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalBuildings() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new ImmeubleBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalFactories() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new IndustrieBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalSchools() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new EcoleBatiment().getClass())) tmp++;
-        }
-        return tmp;
-    }
-
-    public int getTotalLaboratories() {
-        int tmp = 0;
-        for (int i = 0; i < this.bats.size(); i++) {
-            if(this.bats.get(i).getClass().equals(new LaboratoireBatiment().getClass())) tmp++;
+            if(this.bats.get(i).getClass().getSimpleName().equals(name)) tmp++;
         }
         return tmp;
     }
