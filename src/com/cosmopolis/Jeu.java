@@ -4,8 +4,6 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.cosmopolis.batiments.Batiment;
-import com.cosmopolis.batiments.MaisonBatiment;
-
 public class Jeu {
 
     public final int WEEK_LENGTH = 2500;
