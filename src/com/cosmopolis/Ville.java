@@ -41,15 +41,6 @@ public class Ville {
 
     private double popularity = 0.5;
 
-    /**
-    public ArrayList<Batiment> getBats() {
-        return bats;
-    }
-
-     * Le nombre de points de recherches du joueur
-     */
-
-    
     public double getPopularity() {
         return popularity;
     }
@@ -57,7 +48,6 @@ public class Ville {
     public void setPopularity(double popularity) {
         this.popularity = popularity;
     }
-        
 
     /**
      * Le nombre de points de recherches du joueur
@@ -69,7 +59,7 @@ public class Ville {
     public String getName() {
         return name;
     }
-    
+
     public ArrayList<Batiment> getBats() {
         return bats;
     }
@@ -77,12 +67,11 @@ public class Ville {
     public void setName(String name) {
         this.name = name;
     }
-    
 
     public int getWeek() {
         return week;
     }
-    
+
     public void setWeek(int week) {
         this.week = week;
     }
@@ -184,6 +173,24 @@ public class Ville {
         setMoney(money - amount);
     }
 
+    public int nombreMaxHab(){
+        int res=0;
+        ArrayList<Batiment> list = getBats();
+        for(int i=0; i<list.size(); i++){
+            res+=list.get(i).getBarHab();
+        }
+        return res;
+    }
+
+    public int disaster(){
+        int tmp = (int) this.bats.size()/10;
+        Random rd = new Random();
+        for (int i = 0; i<tmp; i++) {
+            this.bats.remove(rd.nextInt(this.bats.size()));
+        }
+        return tmp;
+    }
+
     public boolean buy(int choice) {
         ArrayList<Batiment> batiments = new ArrayList<>();
         batiments.add(new MaisonBatiment());
@@ -204,7 +211,7 @@ public class Ville {
         if (this.money >= batiment.getPrice()) {
             this.bats.add(batiment);
             Random rd = new Random();
-            setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
+            setResidents((batiment.getMinhab() + rd.nextInt(batiment.getMaxhab() - batiment.getMinhab())) + getResidents());
             removeMoney(batiment.getPrice());
             return true;
         } else
