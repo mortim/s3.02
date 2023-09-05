@@ -1,5 +1,6 @@
 package com.cosmopolis;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -14,15 +15,8 @@ import com.cosmopolis.batiments.MaisonBatiment;
 
 public class Ville {
 
-    Ville(String name) {
+    public Ville(String name) {
         this.name = name;
-        this.batsMap.put(new MaisonBatiment(), 0);
-        this.batsMap.put(new CommerceBatiment(), 0);
-        this.batsMap.put(new ImmeubleBatiment(), 0);
-        this.batsMap.put(new IndustrieBatiment(), 0);
-        this.batsMap.put(new EcoleBatiment(), 0);
-        this.batsMap.put(new LaboratoireBatiment(), 0);
-
     }
 
     private String name;
@@ -62,17 +56,14 @@ public class Ville {
      */
     private int research = 0;
 
-    private int totalHouses = 0;
-    private int totalShops = 0;
-    private int totalBuildings = 0;
-    private int totalFactories = 0;
-    private int totalSchools = 0;
-    private int totalLaboratories = 0;
-
-    private Map<Batiment, Integer> batsMap = new HashMap<>();
+    private ArrayList<Batiment> bats = new ArrayList<>();
 
     public String getName() {
         return name;
+    }
+
+    public ArrayList<Batiment> getBats() {
+        return bats;
     }
 
     public void setName(String name) {
@@ -120,51 +111,51 @@ public class Ville {
     }
 
     public int getTotalHouses() {
-        return totalHouses;
-    }
-
-    public void setTotalHouses(int totalHouses) {
-        this.totalHouses = totalHouses;
+        int tmp = 0;
+        for (int i = 0; i < this.bats.size(); i++) {
+            if(this.bats.get(i).getClass().equals(new MaisonBatiment().getClass())) tmp++;
+        }
+        return tmp;
     }
 
     public int getTotalShops() {
-        return totalShops;
-    }
-
-    public void setTotalShops(int totalShops) {
-        this.totalShops = totalShops;
+        int tmp = 0;
+        for (int i = 0; i < this.bats.size(); i++) {
+            if(this.bats.get(i).getClass().equals(new CommerceBatiment().getClass())) tmp++;
+        }
+        return tmp;
     }
 
     public int getTotalBuildings() {
-        return totalBuildings;
-    }
-
-    public void setTotalBuildings(int totalBuildings) {
-        this.totalBuildings = totalBuildings;
+        int tmp = 0;
+        for (int i = 0; i < this.bats.size(); i++) {
+            if(this.bats.get(i).getClass().equals(new ImmeubleBatiment().getClass())) tmp++;
+        }
+        return tmp;
     }
 
     public int getTotalFactories() {
-        return totalFactories;
-    }
-
-    public void setTotalFactories(int totalFactories) {
-        this.totalFactories = totalFactories;
+        int tmp = 0;
+        for (int i = 0; i < this.bats.size(); i++) {
+            if(this.bats.get(i).getClass().equals(new IndustrieBatiment().getClass())) tmp++;
+        }
+        return tmp;
     }
 
     public int getTotalSchools() {
-        return totalSchools;
-    }
-
-    public void setTotalSchools(int totalSchools) {
-        this.totalSchools = totalSchools;
+        int tmp = 0;
+        for (int i = 0; i < this.bats.size(); i++) {
+            if(this.bats.get(i).getClass().equals(new EcoleBatiment().getClass())) tmp++;
+        }
+        return tmp;
     }
 
     public int getTotalLaboratories() {
-        return totalLaboratories;
-    }
-
-    public void setTotalLaboratories(int totalLaboratories) {
-        this.totalLaboratories = totalLaboratories;
+        int tmp = 0;
+        for (int i = 0; i < this.bats.size(); i++) {
+            if(this.bats.get(i).getClass().equals(new LaboratoireBatiment().getClass())) tmp++;
+        }
+        return tmp;
     }
 
     public String toString() {
@@ -180,7 +171,18 @@ public class Ville {
         setWeek(getWeek() + 1);
     }
 
+    public void removeMoney(float amount){
+        setMoney(money - amount);
+    }
+
     public boolean buy(int choice) {
+        ArrayList<Batiment> batiments = new ArrayList<>();
+        batiments.add(new MaisonBatiment());
+        batiments.add(new CommerceBatiment());
+        batiments.add(new ImmeubleBatiment());
+        batiments.add(new IndustrieBatiment());
+        batiments.add(new EcoleBatiment());
+        batiments.add(new LaboratoireBatiment());
         /*
          * Maison 1
          * Commerces 2
@@ -189,14 +191,12 @@ public class Ville {
          * Laboratoire
          */
 
-        Batiment batiment = ((Batiment[]) batsMap.keySet().toArray())[choice - 1];
-
+        Batiment batiment = batiments.get(choice-1);
         if (this.money >= batiment.getPrice()) {
-            this.batsMap.put(batiment, this.batsMap.get(batiment) + 1);
-
+            this.bats.add(batiment);
             Random rd = new Random();
-            setResidents(
-                    (batiment.getMinhab() + rd.nextInt(batiment.getMaxhab() - batiment.getMinhab())) + getResidents());
+            setResidents((batiment.getMinhab() + rd.nextInt(batiment.getMaxhab() - batiment.getMinhab())) + getResidents());
+            removeMoney(batiment.getPrice());
             return true;
         } else
             return false;
