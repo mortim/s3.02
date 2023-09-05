@@ -184,6 +184,15 @@ public class Ville {
         setMoney(money - amount);
     }
 
+    public int disaster(){
+        int tmp = (int) this.bats.size()/10;
+        Random rd = new Random();
+        for (int i = 0; i<tmp; i++) {
+            this.bats.remove(rd.nextInt(this.bats.size()));
+        }
+        return tmp;
+    }
+
     public boolean buy(int choice) {
         ArrayList<Batiment> batiments = new ArrayList<>();
         batiments.add(new MaisonBatiment());
