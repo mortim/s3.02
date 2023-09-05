@@ -1,6 +1,11 @@
 package com.cosmopolis.batiments;
 
-public abstract class Batiment {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public abstract class Batiment implements Serializable {
     private float price;
     private int min_residents;
     private int max_residents;
@@ -55,5 +60,19 @@ public abstract class Batiment {
     }    
     public String toString() {
         return this.getClass().getSimpleName() + "(prix=" + this.price + ", min_residents=" + this.min_residents + ", max_residents=" + this.max_residents + ", palier=" + this.landing + ")";
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeObject(this.price);
+        out.writeObject(this.min_residents);
+        out.writeObject(this.max_residents);
+        out.writeObject(this.landing);   
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        this.price = (float)in.readObject();
+        this.min_residents = (int)in.readObject();
+        this.max_residents = (int)in.readObject();
+        this.landing = (int)in.readObject();
     }
 }

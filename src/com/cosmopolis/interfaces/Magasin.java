@@ -11,12 +11,12 @@ public class Magasin extends Controls {
         Utils.printTxt("src/com/cosmopolis/dessins/village.txt");
         println(Utils.BLUE_BOLD + ville);
 
-        printLabel(1, 10, ville.getTotalHouses(), "maisons");
-        printLabel(2, 50, ville.getTotalShops(), "commerces");
-        printLabel(3, 250, ville.getTotalBuildings(), "immeubles");
-        printLabel(4, 1000, ville.getTotalSchools(), "écoles");
-        printLabel(5, 5000, ville.getTotalFactories(), "industries");
-        printLabel(6, 50000, ville.getTotalLaboratories(), "laboratoires");
+        printLabel(1, 10, ville.getTotalBatiments("MaisonBatiment"), "maisons");
+        printLabel(2, 50, ville.getTotalBatiments("CommerceBatiment"), "commerces");
+        printLabel(3, 250, ville.getTotalBatiments("ImmeubleBatiment"), "immeubles");
+        printLabel(4, 1000, ville.getTotalBatiments("EcoleBatiment"), "écoles");
+        printLabel(5, 5000, ville.getTotalBatiments("IndustrieBatiment"), "industries");
+        printLabel(6, 50000, ville.getTotalBatiments("LabortoireBatiment"), "laboratoires");
 
         printProgressBar("Habitants", 0.5, Utils.GREEN_BACKGROUND, 30);
         System.out.print("    ");
