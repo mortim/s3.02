@@ -1,4 +1,5 @@
 package com.cosmopolis;
+
 public class Semaine {
     /**
      * @param residents Le nombre total d'habitants
