@@ -73,7 +73,7 @@ public class Utils {
     }
 
     public static float getBuildingPrice(float basePrice, int count) {
-        return (float) (basePrice * Math.pow(1.15, count));
+        return (float) (basePrice * Math.pow(1.05, count));
     }
 
 
@@ -97,7 +97,7 @@ public class Utils {
     }
 
     public static void quitter() {
-        System.out.print(Utils.RED_UNDERLINED + "Vous avez quitter le jeu." + Utils.RESET + "\r\n");
+        System.out.print(Utils.RED_UNDERLINED + "Vous avez quitté le jeu." + Utils.RESET + "\r\n");
         System.exit(0);
     }
 }

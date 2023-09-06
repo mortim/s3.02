@@ -1,17 +1,22 @@
 package com.cosmopolis.interfaces;
 
 import java.io.IOException;
+import java.util.Random;
 
 import com.cosmopolis.Controls;
 import com.cosmopolis.Utils;
 import com.cosmopolis.Ville;
+import com.cosmopolis.batiments.AbriBatiment;
 import com.cosmopolis.batiments.Batiment;
+import com.cosmopolis.batiments.CasernePoliceBatiment;
+import com.cosmopolis.batiments.CasernePompierBatiment;
 import com.cosmopolis.batiments.CommerceBatiment;
 import com.cosmopolis.batiments.EcoleBatiment;
 import com.cosmopolis.batiments.ImmeubleBatiment;
 import com.cosmopolis.batiments.IndustrieBatiment;
 import com.cosmopolis.batiments.LaboratoireBatiment;
 import com.cosmopolis.batiments.MaisonBatiment;
+import com.cosmopolis.batiments.TourismeBatiment;
 
 public class Magasin extends Fenetre {
     Ville ville;
@@ -32,7 +37,6 @@ public class Magasin extends Fenetre {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        println("\n\r                               Ville de " + ville.getName() + Utils.RESET);
         println(Utils.RESET);
         
 
@@ -43,15 +47,19 @@ public class Magasin extends Fenetre {
         printLabel(4, new EcoleBatiment());
         printLabel(5, new IndustrieBatiment());
         printLabel(6, new LaboratoireBatiment());
-        // printProgressBar("Habitants", 0.25, Utils.GREEN_BACKGROUND, 30);
-        // System.out.print("    ");
-        // printProgressBar("Recherche", 0.5, Utils.PURPLE_BACKGROUND, 30);
-        // System.out.print("\r\n");
-        // printProgressBar("Sécurité", 0.5, Utils.BLUE_BACKGROUND, 30);
-        // System.out.print("    ");
-        // printProgressBar("Incendies", 0.5, Utils.RED_BACKGROUND, 30);
-        // System.out.print("\r\n");
-        // printProgressBar("Séisme", 0.5, Utils.YELLOW_BACKGROUND, 30);
+        printLabel(7, new AbriBatiment());
+        printLabel(8, new CasernePoliceBatiment());
+        printLabel(9, new CasernePompierBatiment());
+        System.out.print("\r\n");
+        Random random = new Random();
+        printProgressBar("Protection surpopulation", random.nextDouble(), Utils.GREEN_BACKGROUND, 30);
+        System.out.print("    ");
+        printProgressBar("Sécurité", random.nextDouble(), Utils.BLUE_BACKGROUND, 30);
+        System.out.print("\r\n");
+        printProgressBar("Protection aux incendies", random.nextDouble(), Utils.RED_BACKGROUND, 30);
+        System.out.print("    ");
+        printProgressBar("Protection aux séismes", random.nextDouble(), Utils.YELLOW_BACKGROUND, 30);
+
         
         // printAlert("7 de vos habitants sont morts");
     }

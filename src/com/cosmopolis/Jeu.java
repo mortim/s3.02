@@ -55,7 +55,7 @@ public class Jeu extends Controls {
             }
             printHeader(
                 "  " + (int) ville.getMoney() + "$  " + Utils.GREEN_BACKGROUND + "  " + (int) Utils.getIncomeForWeek(ville.getResidents()) + "$/sem  " + Utils.WHITE_BACKGROUND,
-                Utils.BLUE_BACKGROUND + "  semaine n°" + ville.getWeek() + "  \r" + Utils.RESET);
+                Utils.PURPLE_BACKGROUND + "  " + ville.getResidents() + " hab.  " + Utils.BLUE_BACKGROUND + "  semaine n°" + ville.getWeek() + "  \r" + Utils.RESET);
             // printHeader("← Cliquer / Ville / Fusée →", "Utilisez les flèches pour changer de menu");
 
             if(screen != lastScreen) {
