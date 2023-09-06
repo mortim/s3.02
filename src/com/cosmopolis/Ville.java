@@ -18,6 +18,7 @@ import com.cosmopolis.batiments.IndustrieBatiment;
 import com.cosmopolis.batiments.LaboratoireBatiment;
 import com.cosmopolis.batiments.MaisonBatiment;
 import com.cosmopolis.batiments.OfficeToursismeBatiment;
+import com.cosmopolis.batiments.TourismeBatiment;
 
 public class Ville {
 
@@ -158,7 +159,7 @@ public class Ville {
             new IndustrieBatiment(),
             new EcoleBatiment(),
             new LaboratoireBatiment(),
-            new OfficeToursismeBatiment(),
+            new TourismeBatiment(),
             new CasernePoliceBatiment(),
             new CasernePompierBatiment(),
             new AbriBatiment()
