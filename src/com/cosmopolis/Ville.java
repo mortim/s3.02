@@ -17,7 +17,6 @@ import com.cosmopolis.batiments.ImmeubleBatiment;
 import com.cosmopolis.batiments.IndustrieBatiment;
 import com.cosmopolis.batiments.LaboratoireBatiment;
 import com.cosmopolis.batiments.MaisonBatiment;
-import com.cosmopolis.batiments.OfficeToursismeBatiment;
 import com.cosmopolis.batiments.TourismeBatiment;
 
 public class Ville {
