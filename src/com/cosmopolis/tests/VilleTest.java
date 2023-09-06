@@ -24,9 +24,9 @@ public class VilleTest {
     }
     @Test
     void testBuy() {
-        assertFalse(v.buy(4));
+        assertEquals(v.buy(4), 0);
         v.setResidents(250);
-        assertTrue(v.buy(4));
+        assertEquals(v.buy(4), 0);
         ArrayList<Batiment> bats = new ArrayList<>();
         bats.add(new IndustrieBatiment());
         assertTrue(v.getBats().get(0).getPrice() == bats.get(0).getPrice());

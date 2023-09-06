@@ -1,11 +1,11 @@
-       Félicitations, la fusée est en orbite !
+       
   *       /\     *
          (  )               *
   *      (  )         *     
         /|/\|\      *  *   *     *
    *   /_||||_\      *    
-         \\//     *      *  *     *
-          \/   *       *   
+         \\//     *      *  *     *     Félicitations, la fusée est en orbite !
+          \/   *       *                Vous avez gagné!
   *   *                                             
           .-'.  ':'-.   *   *   *
 *    *  .''::: .:    '.

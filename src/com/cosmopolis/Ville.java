@@ -17,6 +17,8 @@ import com.cosmopolis.batiments.MaisonBatiment;
 
 public class Ville {
 
+    public static final double RESEARCH_POINTS_TO_WIN = 1000.0;
+
     public Ville(String name) {
         this.name = name;
     }
@@ -56,7 +58,7 @@ public class Ville {
     /**
      * Le nombre de points de recherches du joueur
      */
-    private int research = 0;
+    private double research = 0.0;
 
     private List<Batiment> bats = new ArrayList<>();
 
@@ -104,12 +106,16 @@ public class Ville {
         this.residents = residents;
     }
 
-    public int getResearch() {
+    public double getResearch() {
         return research;
     }
 
-    public void setResearch(int research) {
+    public void setResearch(double research) {
         this.research = research;
+    }
+
+    public void addResearch(double count) {
+        setResearch(getResearch() + count);
     }
 
     public int getTotalBatiments(String name) {
@@ -137,6 +143,7 @@ public class Ville {
         setMoney(money - amount);
     }
 
+
     public int nombreMaxHab(){
         int res=0;
         List<Batiment> list = getBats();
@@ -146,7 +153,14 @@ public class Ville {
         return res;
     }
 
-    public boolean buy(int choice) {
+    /**
+     * @param choice Le numéro du bâtiment
+     * @return Renvoie un entier entre 0 et 2.
+     * 0 = tout est bon
+     * 1 = pas assez d'argent
+     * 2 = bâtiment pas découvert
+     */
+    public int buy(int choice) {
         Batiment[] batiments = new Batiment[]{
             new MaisonBatiment(),
             new CommerceBatiment(),
@@ -164,11 +178,11 @@ public class Ville {
                 Random rd = new Random();
                 setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
                 removeMoney(batiment.getTotalPrice(count));
-                return true;
+                return 0;
             } else
-                return false;
+                return 1;
         }
-        return false;
+        return 2;
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
@@ -192,5 +206,9 @@ public class Ville {
         this.popularity = (double)in.readObject();
         this.research = (int)in.readObject();
         this.bats = (ArrayList<Batiment>)in.readObject();
+    }
+
+    public boolean canWin() {
+        return getResearch() > Ville.RESEARCH_POINTS_TO_WIN;
     }
 }
