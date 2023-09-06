@@ -1,10 +1,22 @@
 package com.cosmopolis.interfaces;
 
 import java.io.IOException;
+import java.util.Random;
 
 import com.cosmopolis.Controls;
 import com.cosmopolis.Utils;
 import com.cosmopolis.Ville;
+import com.cosmopolis.batiments.AbriBatiment;
+import com.cosmopolis.batiments.Batiment;
+import com.cosmopolis.batiments.CasernePoliceBatiment;
+import com.cosmopolis.batiments.CasernePompierBatiment;
+import com.cosmopolis.batiments.CommerceBatiment;
+import com.cosmopolis.batiments.EcoleBatiment;
+import com.cosmopolis.batiments.ImmeubleBatiment;
+import com.cosmopolis.batiments.IndustrieBatiment;
+import com.cosmopolis.batiments.LaboratoireBatiment;
+import com.cosmopolis.batiments.MaisonBatiment;
+import com.cosmopolis.batiments.TourismeBatiment;
 
 public class Magasin extends Fenetre {
     Ville ville;
@@ -26,20 +38,28 @@ public class Magasin extends Fenetre {
             e.printStackTrace();
         }
         println(Utils.RESET);
-        printLabel(1, 10, ville.getTotalBatiments("MaisonBatiment"), "maisons");
-        printLabel(2, 50, ville.getTotalBatiments("CommerceBatiment"), "commerces");
-        printLabel(3, 250, ville.getTotalBatiments("ImmeubleBatiment"), "immeubles");
-        printLabel(4, 50000, ville.getTotalBatiments("LaboratoiresBatiment"), "laboratoires");
+        
 
-        // printProgressBar("Habitants", 0.25, Utils.GREEN_BACKGROUND, 30);
-        // System.out.print("    ");
-        // printProgressBar("Recherche", 0.5, Utils.PURPLE_BACKGROUND, 30);
-        // System.out.print("\r\n");
-        // printProgressBar("Sécurité", 0.5, Utils.BLUE_BACKGROUND, 30);
-        // System.out.print("    ");
-        // printProgressBar("Incendies", 0.5, Utils.RED_BACKGROUND, 30);
-        // System.out.print("\r\n");
-        // printProgressBar("Séisme", 0.5, Utils.YELLOW_BACKGROUND, 30);
+        
+        printLabel(1, new MaisonBatiment());
+        printLabel(2, new CommerceBatiment());
+        printLabel(3, new ImmeubleBatiment());
+        printLabel(4, new EcoleBatiment());
+        printLabel(5, new IndustrieBatiment());
+        printLabel(6, new LaboratoireBatiment());
+        printLabel(7, new AbriBatiment());
+        printLabel(8, new CasernePoliceBatiment());
+        printLabel(9, new CasernePompierBatiment());
+        System.out.print("\r\n");
+        Random random = new Random();
+        printProgressBar("Protection surpopulation", random.nextDouble(), Utils.GREEN_BACKGROUND, 30);
+        System.out.print("    ");
+        printProgressBar("Sécurité", random.nextDouble(), Utils.BLUE_BACKGROUND, 30);
+        System.out.print("\r\n");
+        printProgressBar("Protection aux incendies", random.nextDouble(), Utils.RED_BACKGROUND, 30);
+        System.out.print("    ");
+        printProgressBar("Protection aux séismes", random.nextDouble(), Utils.YELLOW_BACKGROUND, 30);
+
         
         // printAlert("7 de vos habitants sont morts");
     }
@@ -64,13 +84,14 @@ public class Magasin extends Fenetre {
 
 
 
-    public void printLabel(int id, int price, int count, String label) {
+    public void printLabel(int id, Batiment batiment) {
+        int count = ville.getTotalBatiments(batiment.getClass().getSimpleName());
         String s = Utils.BLACK + "    [" + id + "] ";
-        if(price <= ville.getMoney()) {
+        if(batiment.getTotalPrice(count) <= ville.getMoney()) {
             s += Utils.GREEN_BOLD;
         } else {
             s += Utils.RED_BOLD;
         }
-        println(s + count + " " + Utils.RESET + label + Utils.BLACK + " (" + (int) Utils.getBuildingPrice(price, count) + "$)" + Utils.RESET);
+        println(s + count + " " + Utils.RESET + batiment.getLabel() + Utils.BLACK + " (" + (int) batiment.getTotalPrice(count) + "$)" + Utils.RESET);
     }
 }

@@ -1,8 +1,8 @@
 package com.cosmopolis;
 
+import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -165,12 +165,13 @@ public class Ville {
         };
 
         Batiment batiment = batiments[choice-1];
+        int count = getTotalBatiments(batiment.getClass().getSimpleName());
         if(this.residents>=batiment.getLanding()){
-            if (this.money >= batiment.getPrice()) {
+            if (this.money >= batiment.getTotalPrice(count)) {
                 this.bats.add(batiment);
                 Random rd = new Random();
                 setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
-                removeMoney(batiment.getPrice());
+                removeMoney(batiment.getTotalPrice(count));
                 return true;
             } else
                 return false;

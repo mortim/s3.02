@@ -72,6 +72,7 @@ public class Controls {
       keyboardListener.start();
     } else {
       listeningConsole = false;
+      keyboardListener.stop();
 
       try {
         String[] commands = new String[] { "/bin/sh", "-c", "stty sane </dev/tty" };
@@ -90,8 +91,10 @@ public class Controls {
    * This function will be executed each time the user enters a key.
    * The key itself won't be displayed in the standard input.
    * @param keyCode The unique key code of the pressed key (an integer).
+   * @throws IOException
+   * @throws InterruptedException
    */
-  protected void keyTypedInConsole(int keyCode) { }
+  protected void keyTypedInConsole(int keyCode) throws InterruptedException, IOException { }
 
   /**
    * Allows the program to sleep for a while.

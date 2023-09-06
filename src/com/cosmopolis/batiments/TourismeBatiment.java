@@ -1,8 +1,8 @@
 package com.cosmopolis.batiments;
 
-public class OfficeToursismeBatiment extends Batiment {
-    public OfficeToursismeBatiment(){
-        super(2000, 2, 6, 1000, 25);
+public class TourismeBatiment extends Batiment {
+    public TourismeBatiment(){
+        super(2000, 2, 6, 1000, 25, "offices de tourismes");
     }
 
     public String toString(){

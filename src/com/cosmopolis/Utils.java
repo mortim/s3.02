@@ -59,6 +59,11 @@ public class Utils {
         return (float) residents;
     }
     
+    public static float getResearchPointsForWeek(int laboratories) {
+        return (float) ((float) laboratories * 0.1);
+    }
+
+    
     /**
      * @param residents Le nombre total d'habitants
      * @return Renvoie le nombre total d'argents gagnés par un clic.
@@ -67,8 +72,8 @@ public class Utils {
         return (float) (residents * 0.5);
     }
 
-    public static float getBuildingPrice(int basePrice, int count) {
-        return (float) (basePrice + Math.pow(1.15, count*0.05));
+    public static float getBuildingPrice(float basePrice, int count) {
+        return (float) (basePrice * Math.pow(1.05, count));
     }
 
 
@@ -89,5 +94,10 @@ public class Utils {
             output += sc.nextLine() + "\n";
         sc.close();
         return output;
+    }
+
+    public static void quitter() {
+        System.out.print(Utils.RED_UNDERLINED + "Vous avez quitté le jeu." + Utils.RESET + "\r\n");
+        System.exit(0);
     }
 }
