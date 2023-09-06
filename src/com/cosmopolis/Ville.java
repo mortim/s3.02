@@ -17,6 +17,7 @@ import com.cosmopolis.batiments.ImmeubleBatiment;
 import com.cosmopolis.batiments.IndustrieBatiment;
 import com.cosmopolis.batiments.LaboratoireBatiment;
 import com.cosmopolis.batiments.MaisonBatiment;
+import com.cosmopolis.batiments.TourismeBatiment;
 
 public class Ville {
 
@@ -157,9 +158,10 @@ public class Ville {
             new IndustrieBatiment(),
             new EcoleBatiment(),
             new LaboratoireBatiment(),
-            new AbriBatiment(),
+            new TourismeBatiment(),
             new CasernePoliceBatiment(),
-            new CasernePompierBatiment()
+            new CasernePompierBatiment(),
+            new AbriBatiment()
         };
 
         Batiment batiment = batiments[choice-1];
