@@ -1,8 +1,9 @@
 package com.cosmopolis;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 import com.cosmopolis.interfaces.Click;
+import com.cosmopolis.interfaces.Fenetre;
 import com.cosmopolis.interfaces.Fusee;
 import com.cosmopolis.interfaces.Magasin;
 
@@ -11,7 +12,9 @@ public class Jeu extends Controls {
     /**
      * La longueur d'une semaine en millisecondes.
      */
-    public final int WEEK_LENGTH = 2500;
+    public final int WEEK_LENGTH = 3000;
+
+    public final int TICK_LENGTH = 100;
     /**
      * Le nombre de millisecondes avant le jour suivant.
      */
@@ -21,8 +24,9 @@ public class Jeu extends Controls {
      * L'écran sur laquelle le joueur se trouve actuellement (0 = cliquer, 1 = acheter des bâtiments, 2 = envoyer une fusée)
      */
     public int screen = 1;
+    public int lastScreen = -1;
 
-    public Object currentScreen;
+    public Fenetre currentScreen;
     /**
      * Les données du joueur
      */
@@ -32,48 +36,81 @@ public class Jeu extends Controls {
     Jeu() throws InterruptedException, IOException {
     
         // D'abord on demande au joueur de nommer sa ville
-        println("Entrez un nom à votre ville:");
-        try (Scanner scanner = new Scanner(System.in)) {
-            ville = new Ville(scanner.nextLine());
-        }
-        ville.setResidents(10);
+        // println("Entrez un nom à votre ville:");
+        // try (Scanner scanner = new Scanner(System.in)) {
+        //     ville = new Ville(scanner.nextLine());
+        // }
+        // ville.setResidents(10);
+        ville = new Ville("Lille");
         enableKeyTypedInConsole(true);
+        ville.setMoney(100);
         while (true) {
             clearMyScreen();
 
             if(msUntilNextWeek < 0) {
                 ville.incrementWeek();
                 ville.addMoney(Utils.getIncomeForWeek(ville.getResidents()));
-                ville.setResidents(ville.getResidents() + 1);
                 msUntilNextWeek = WEEK_LENGTH;
             }
-            printHeader("    " + ville.getMoney() + "$", Utils.getIncomeForWeek(ville.getResidents()) / (WEEK_LENGTH / 1000) + "$/s        semaine n°" + ville.getWeek() + "    \r");
-            printHeader("← Cliquer / Ville / Fusée →", "Utilisez les flèches pour changer de menu");
-            
-            switch (screen) {
-                case 0:
-                    new Click();
-                    break;
-                case 1:
-                    new Magasin(ville);
-                    break;
-                case 2:
-                    new Fusee();
-                    break;  
-            }
+            printHeader(
+                "  " + ville.getMoney() + "$  " + Utils.GREEN_BACKGROUND + "  " + (int) Utils.getIncomeForWeek(ville.getResidents()) / (WEEK_LENGTH / 1000) + "$/sec  " + Utils.WHITE_BACKGROUND,
+                Utils.BLUE_BACKGROUND + "  semaine n°" + ville.getWeek() + "  \r" + Utils.RESET);
+            // printHeader("← Cliquer / Ville / Fusée →", "Utilisez les flèches pour changer de menu");
 
-            Thread.sleep(100);
+            if(screen != lastScreen) {
+                updateScreen();
+            }            
+            currentScreen.update();
+            sleep(100);
             msUntilNextWeek -= 100;
         }
     }
 
+    public void updateScreen() throws FileNotFoundException, InterruptedException {
+        switch (screen) {
+            case 0:
+                currentScreen = new Click();
+                break;
+            case 1:
+                currentScreen = new Magasin(ville);
+                break;
+            case 2:
+                currentScreen = new Fusee();
+                break;  
+        }
+    }
+
+    public void tryToBuy(int choice) {
+        if(!ville.buy(choice)) {
+            printAlert("Vous n'avez pas assez d'argent!");
+        };
+    }
+
     protected void keyTypedInConsole(int keyCode) {
+        if(keyCode == Raccourcis.PAVE_1.getID() || keyCode == Raccourcis.PAVE_1.getID()) {
+            tryToBuy(1);
+        } else if(keyCode == Raccourcis.PAVE_2.getID() || keyCode == Raccourcis.SPECIAUX_2.getID()) {
+            tryToBuy(2);
+        } else if(keyCode == Raccourcis.PAVE_3.getID() || keyCode == Raccourcis.SPECIAUX_3.getID()) {
+            tryToBuy(3);
+        } else if(keyCode == Raccourcis.PAVE_4.getID() || keyCode == Raccourcis.SPECIAUX_4.getID()) {
+            tryToBuy(4);
+        } else if(keyCode == Raccourcis.PAVE_5.getID() || keyCode == Raccourcis.SPECIAUX_5.getID()) {
+            tryToBuy(5);
+        } else if(keyCode == Raccourcis.PAVE_6.getID() || keyCode == Raccourcis.SPECIAUX_6.getID()) {
+            tryToBuy(6);
+        }
+        
         switch (keyCode) {
             case 19:
-                screen--;
+                if(screen > 0) {
+                    screen--;
+                }
                 break;
             case 20:
-                screen++;
+                if(screen < 2) {
+                    screen++;
+                }
                 break;
             default:
                 break;
@@ -96,4 +133,15 @@ public class Jeu extends Controls {
         }
         System.out.print(right_label + Utils.RESET + "\n");
     }
+
+    public void printAlert(String alert) {
+        System.out.print("\r\n" + Utils.BLUE_BACKGROUND + " ! " + Utils.WHITE_BACKGROUND + " ");
+
+        System.out.print(Utils.WHITE_BACKGROUND + alert);
+        for (int i = 0; i < Utils.SCREEN_WIDTH - (alert.length() + 4); i++) {
+            System.out.print(' ');
+        }
+        System.out.print(Utils.RESET + "\r\n");
+    }
+
 }

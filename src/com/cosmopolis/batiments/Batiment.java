@@ -18,11 +18,12 @@ public abstract class Batiment implements Serializable {
      * @param max_residents Nombre maximum d'habitants
      * @param landing Palier en nombre d'habitants
      */
-    public Batiment(int price, int min_residents, int max_residents, int landing) {
+    public Batiment(int price, int min_residents, int max_residents, int landing, int barhab) {
         this.price = price;
         this.min_residents = min_residents;
         this.max_residents = max_residents;
         this.landing = landing;
+        this.barhab=barhab;
     }
 
     public Batiment(int price, int landing){

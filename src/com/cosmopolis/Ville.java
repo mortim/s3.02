@@ -138,18 +138,9 @@ public class Ville {
         int res=0;
         List<Batiment> list = getBats();
         for(int i=0; i<list.size(); i++){
-            res+=list.get(i).getBarHab();
+            res+=list.get(i).getMaxResidents();
         }
         return res;
-    }
-
-    public int disaster(){
-        int tmp = (int) this.bats.size()/10;
-        Random rd = new Random();
-        for (int i = 0; i<tmp; i++) {
-            this.bats.remove(rd.nextInt(this.bats.size()));
-        }
-        return tmp;
     }
 
     public boolean buy(int choice) {

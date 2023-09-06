@@ -1,0 +1,9 @@
+*********************************************************
+*                                                       *
+*        Utilisez les flèches de votre clavier          *
+*        pour naviguer entre les menus.                 *
+*                                                       *
+*        Votre objectif est d'atteindre la lune,        *
+*        en contruisant le meilleur village.            *
+*                                                       *
+*********************************************************

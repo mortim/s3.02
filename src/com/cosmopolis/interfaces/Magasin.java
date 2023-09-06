@@ -6,29 +6,42 @@ import com.cosmopolis.Controls;
 import com.cosmopolis.Utils;
 import com.cosmopolis.Ville;
 
-public class Magasin extends Controls {
-    public Magasin(Ville ville) throws IOException {
-        Utils.printTxt("src/com/cosmopolis/dessins/village.txt");
-        println(Utils.BLUE_BOLD + ville);
+public class Magasin extends Fenetre {
+    Ville ville;
+    public Magasin(Ville ville) {
+        this.ville = ville;
+    }
 
+    public void update() {
+        System.out.print(Utils.BLACK_BOLD);
+        try {
+            if(ville.getTotalBatiments("MaisonBatiment") == 0) {
+                Utils.printTxt("src/com/cosmopolis/dessins/village/1.txt");
+            } else if(ville.getTotalBatiments("MaisonBatiment") < 5) {
+                Utils.printTxt("src/com/cosmopolis/dessins/village/2.txt");
+            } else {
+                Utils.printTxt("src/com/cosmopolis/dessins/village/3.txt");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Utils.RESET);
         printLabel(1, 10, ville.getTotalBatiments("MaisonBatiment"), "maisons");
         printLabel(2, 50, ville.getTotalBatiments("CommerceBatiment"), "commerces");
         printLabel(3, 250, ville.getTotalBatiments("ImmeubleBatiment"), "immeubles");
-        printLabel(4, 1000, ville.getTotalBatiments("EcoleBatiment"), "écoles");
-        printLabel(5, 5000, ville.getTotalBatiments("IndustrieBatiment"), "industries");
-        printLabel(6, 50000, ville.getTotalBatiments("LabortoireBatiment"), "laboratoires");
+        printLabel(4, 50000, ville.getTotalBatiments("LaboratoiresBatiment"), "laboratoires");
 
-        printProgressBar("Habitants", 0.5, Utils.GREEN_BACKGROUND, 30);
-        System.out.print("    ");
-        printProgressBar("Recherche", 0.5, Utils.PURPLE_BACKGROUND, 30);
-        System.out.print("\r\n");
-        printProgressBar("Sécurité", 0.5, Utils.BLUE_BACKGROUND, 30);
-        System.out.print("    ");
-        printProgressBar("Incendies", 0.5, Utils.RED_BACKGROUND, 30);
-        System.out.print("\r\n");
-        printProgressBar("Séisme", 0.5, Utils.YELLOW_BACKGROUND, 30);
+        // printProgressBar("Habitants", 0.25, Utils.GREEN_BACKGROUND, 30);
+        // System.out.print("    ");
+        // printProgressBar("Recherche", 0.5, Utils.PURPLE_BACKGROUND, 30);
+        // System.out.print("\r\n");
+        // printProgressBar("Sécurité", 0.5, Utils.BLUE_BACKGROUND, 30);
+        // System.out.print("    ");
+        // printProgressBar("Incendies", 0.5, Utils.RED_BACKGROUND, 30);
+        // System.out.print("\r\n");
+        // printProgressBar("Séisme", 0.5, Utils.YELLOW_BACKGROUND, 30);
         
-        printAlert("7 de vos habitants sont morts");
+        // printAlert("7 de vos habitants sont morts");
     }
 
     private void printProgressBar(String label, double progress, String background, int size) {
@@ -50,17 +63,18 @@ public class Magasin extends Controls {
     }
 
 
-    public void printAlert(String alert) {
-        System.out.print("\r\n" + Utils.BLUE_BACKGROUND + " ! " + Utils.WHITE_BACKGROUND + " ");
-
-        System.out.print(Utils.WHITE_BACKGROUND + alert);
-        for (int i = 0; i < Utils.SCREEN_WIDTH - (alert.length() + 4); i++) {
-            System.out.print(' ');
-        }
-        System.out.print(Utils.RESET + "\r\n");
-    }
 
     public void printLabel(int id, int price, int count, String label) {
-        println(Utils.BLACK + "    [" + id + "] " + Utils.GREEN_BOLD + count + " " + Utils.RESET + label + Utils.BLACK + " (" + (int) Utils.getBuildingPrice(price, count) + "$)" + Utils.RESET);
+        String s = Utils.BLACK + "    [" + id + "] ";
+        if(price <= ville.getMoney()) {
+            s += Utils.GREEN_BOLD;
+        } else {
+            s += Utils.RED_BOLD;
+        }
+        println(s + count + " " + Utils.RESET + label + Utils.BLACK + " (" + (int) Utils.getBuildingPrice(price, count) + "$)" + Utils.RESET);
+    }
+
+    protected void println(Object content) {
+        System.out.print("\r" + content + "\r\n");
     }
 }
