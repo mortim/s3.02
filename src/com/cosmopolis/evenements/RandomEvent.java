@@ -22,7 +22,7 @@ public class RandomEvent {
                 int v = (int)(ville.getResidents()* 1.1 + (r.nextDouble() + (1.4 - 1.1)));
                 int vv = ville.getResidents();
                 ville.setResidents(v);
-                msg = "Votre ville semble attirer de nouvelles personnes ! "+(vv-v)+" habitants arrivent.";
+                msg = "Votre ville semble attirer de nouvelles personnes ! "+(Math.abs(vv-v)) +" habitants arrivent.";
                 break;
             case MOURRANT:
                 int v1 = (int)(ville.getResidents()* 0.9 + (r.nextDouble() + (0.7 - (0.9))));
@@ -73,7 +73,7 @@ public class RandomEvent {
                 int v11 = (int)(ville.getMoney() * 0.9 + (r.nextDouble() + (0.8 - (0.9))));
                 double v12 = ville.getMoney();
                 ville.setMoney(v11);
-                msg = "Un groupe de cambrioleur, qui convoitait votre patrimoine, est parvenu à chapparder votre argent ! Vous perdez "+(v12-v11)+"$.";
+                msg = "Un groupe de cambrioleur, qui convoitait votre patrimoine, est parvenu à chapparder votre argent ! Vous perdez "+(v12-v11)+"€.";
                 break;
         }
         return msg;

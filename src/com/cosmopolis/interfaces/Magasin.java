@@ -63,8 +63,12 @@ public class Magasin extends Fenetre {
             System.out.print("    ");
             printProgressBar("Protection aux incendies", ville.pompiersParHabitants(), Utils.RED_BACKGROUND, 30);
         }
+        System.out.print("\r\n");
+        if(ville.getResidents() > 0) {
+            printProgressBar("   Population (" + ville.getResidents() + "/" + ville.getTotalBar() + ")", (float) ((float) ville.getResidents() / (float) ville.getTotalBar()), Utils.GREEN_BACKGROUND, 60);
+        }
 
-        
+        println(' ');        
         // printAlert("7 de vos habitants sont morts");
     }
 

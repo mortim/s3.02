@@ -132,7 +132,7 @@ public class Ville {
 
     public String toString() {
         return "Ville de " + getName() + ", Semaine " + getWeek() + " avec " + getResidents() + " habitants, "
-                + getMoney() + "$";
+                + getMoney() + "€";
     }
 
     public void addMoney(float amount) {
@@ -249,5 +249,13 @@ public class Ville {
     public double getResearchPointsForWeek() {
         // return 10.0;
         return getTotalBatiments("LaboratoireBatiment") * 2.5 * Math.min(ecoleParHabitants(), 1.0);
+    }
+
+    public int getTotalBar() {
+        int total = 0;
+        for (Batiment bat : getBats()) {
+            total += bat.getBarHab();
+        }
+        return total;
     }
 }

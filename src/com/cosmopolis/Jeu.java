@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.cosmopolis.batiments.Batiment;
 import com.cosmopolis.evenements.Evenement;
 import com.cosmopolis.evenements.RandomEvent;
 import com.cosmopolis.interfaces.Click;
@@ -43,12 +44,17 @@ public class Jeu extends Controls {
         ville = new Ville(nom);
         enableKeyTypedInConsole(true);
 
-        ville.setMoney(500);
+        ville.setMoney(50000);
         while (true) {
             clearMyScreen();
             
             if(msUntilNextWeek < 0) {
                 semainesDepuisEvenement += 1;
+
+                if( ville.getResidents() >= 100 && ville.getResidents() <= ville.getTotalBar() && random.nextDouble() > 0.75) {
+                    RandomEvent randomEvent = new RandomEvent(ville, Evenement.ARRIVANT);
+                    addAlert(true, randomEvent.createEvent());
+                }
                 
                 if(ville.getResidents() > 1000 && semainesDepuisEvenement > 7) {
                     boolean evenementPassee = false;
@@ -86,8 +92,8 @@ public class Jeu extends Controls {
                 msUntilNextWeek = WEEK_LENGTH;
             }
             printHeader(
-                Utils.WHITE_BACKGROUND + "  " + (int) ville.getMoney() + "$  " + Utils.GREEN_BACKGROUND + "  " + (int) Utils.getIncomeForWeek(ville.getResidents()) + "$/sem  " + Utils.WHITE_BACKGROUND,
-                Utils.PURPLE_BACKGROUND + "  " + ville.getResidents() + " hab.  " + Utils.BLUE_BACKGROUND + "  semaine n°" + ville.getWeek() + "  \r" + Utils.RESET);
+                Utils.WHITE_BACKGROUND + "  " + (int) ville.getMoney() + "€  " + Utils.GREEN_BACKGROUND + "  " + (int) Utils.getIncomeForWeek(ville.getResidents()) + "€/sem  " + Utils.WHITE_BACKGROUND,
+                Utils.BLUE_BACKGROUND + "  semaine n°" + ville.getWeek() + "  \r" + Utils.RESET);
             
             printHeader(
                 Utils.WHITE_BACKGROUND + Utils.WHITE_BOLD + "Ville de " + ville.getName(),
@@ -98,7 +104,7 @@ public class Jeu extends Controls {
             currentScreen.update();
             for (int i = alerts.size() - 1; i >= 0; i--) {
                 Alert alert = alerts.get(i);
-                printAlert(alert.label, alert.important);
+                printAlert(alert.label, alert.important, alert.positive);
                 alert.timeLeft -= TICK_LENGTH;
                 if(alert.timeLeft < 0) {
                     alerts.remove(alert);
@@ -195,14 +201,6 @@ public class Jeu extends Controls {
                     }
                 }
         }
-        if(keyCode == Raccourcis.S.getID()) { // sauvegarder
-            Sauvegarde sauvegarde = new Sauvegarde("/tmp/save.dat");
-            sauvegarde.sauvegarder(ville);
-        }
-        
-        if(keyCode == Raccourcis.L.getID()) { // charger
-            ville = new Sauvegarde("/tmp/save.dat").lire();
-        }
 
 
         if(keyCode == Raccourcis.Q.getID()) {
@@ -242,9 +240,13 @@ public class Jeu extends Controls {
         System.out.print(right_label + Utils.RESET + "\n");
     }
 
-    public void printAlert(String alert, boolean important) {
+    public void printAlert(String alert, boolean important, boolean positive) {
         if(important) {
-            System.out.print("\r\n" + Utils.RED_BACKGROUND + " EVENEMENT " + Utils.YELLOW_BACKGROUND + " ");
+            if(positive) {
+                System.out.print("\r\n" + Utils.RED_BACKGROUND + " EVENEMENT " + Utils.YELLOW_BACKGROUND + " ");
+            } else {
+                System.out.print("\r\n" + Utils.WHITE_BACKGROUND + " + " + Utils.GREEN_BACKGROUND + " ");
+            }
         } else {
             System.out.print("\r\n" + Utils.BLUE_BACKGROUND + " ! " + Utils.WHITE_BACKGROUND + " ");
         }
