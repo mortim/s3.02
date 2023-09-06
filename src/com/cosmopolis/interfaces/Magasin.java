@@ -54,7 +54,7 @@ public class Magasin extends Fenetre {
         printLabel(9, new LaboratoireBatiment());
         System.out.print("\r\n");
         Random random = new Random();
-        if(ville.getResidents() > 1) {
+        if(ville.getResidents() > 1000) {
             printProgressBar("Education", ville.ecoleParHabitants(), Utils.GREEN_BACKGROUND, 30);
             System.out.print("    ");
             printProgressBar("Protection aux séismes", ville.abriParHabitants(), Utils.YELLOW_BACKGROUND, 30);

@@ -14,6 +14,7 @@ public class Alert {
     Alert(boolean important, String label) {
         this.important = important;
         this.label = label;
+        timeLeft = 6000;
     }
 
 }

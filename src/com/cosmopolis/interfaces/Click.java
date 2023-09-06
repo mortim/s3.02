@@ -7,7 +7,6 @@ import com.cosmopolis.Utils;
 public class Click extends Fenetre {
     
     public void update() throws IOException {
-        Utils.printTxt("src/com/cosmopolis/dessins/logo.txt");
         println("Bienvenue dans Cosmopolis!");
         println("Votre objectif est de construire la meilleure ville et d'envoyer une fusée.");
         println("Utilisez votre clavier pour jouer.");

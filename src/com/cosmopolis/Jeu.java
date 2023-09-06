@@ -1,6 +1,7 @@
 package com.cosmopolis;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.cosmopolis.evenements.Evenement;
 import com.cosmopolis.evenements.RandomEvent;
@@ -34,29 +35,52 @@ public class Jeu extends Controls {
      */
     public Ville ville;
     public ArrayList<Alert> alerts = new ArrayList<>();
+    public int semainesDepuisEvenement = 0;
 
     
-    Jeu() throws InterruptedException, IOException {
-        // Menu menu new Menu(this);
-        // menu();
-    
-        // println("Entrez un nom à votre ville:");
-        // try (Scanner scanner = new Scanner(System.in)) {
-        //     ville = new Ville(scanner.nextLine());
-        // }
-        ville = new Ville("Lille");
+    Jeu(String nom) throws InterruptedException, IOException {
+        Random random = new Random();
+        ville = new Ville(nom);
         enableKeyTypedInConsole(true);
-        ville.setMoney(1000000);
+        ville.setMoney(500);
         while (true) {
             clearMyScreen();
-
+            
             if(msUntilNextWeek < 0) {
+                semainesDepuisEvenement += 1;
+                
+                if(ville.getResidents() > 1000 && semainesDepuisEvenement > 7) {
+                    boolean evenementPassee = false;
+                    // if(random.nextDouble() > (1.0 - Math.pow(ville.abriParHabitants(), 2))) {
+                    //     RandomEvent randomEvent = new RandomEvent(ville, Evenement.SEISME);
+                    //     addAlert(true, randomEvent.createEvent());
+                    // }
+                    if(random.nextDouble() > Math.pow(ville.abriParHabitants(), 2)) {
+                        RandomEvent randomEvent = new RandomEvent(ville, Evenement.SEISME);
+                        addAlert(true, randomEvent.createEvent());
+                        evenementPassee = true;
+                    } else if(random.nextDouble() > Math.pow(ville.policeParHabitants(), 2)) {
+                        RandomEvent randomEvent = new RandomEvent(ville, Evenement.BRAQUAGE);
+                        addAlert(true, randomEvent.createEvent());
+                        evenementPassee = true;
+                    } else if(random.nextDouble() > Math.pow(ville.pompiersParHabitants(), 2)) {
+                        RandomEvent randomEvent = new RandomEvent(ville, Evenement.INCENDIE);
+                        addAlert(true, randomEvent.createEvent());
+                        evenementPassee = true;
+                    }
+
+                    if(evenementPassee) {
+                        semainesDepuisEvenement = 0;
+                    }
+                    
+                }
+
                 ville.incrementWeek();
                 ville.addMoney(Utils.getIncomeForWeek(ville.getResidents()));
-                ville.setResearch(ville.getResearch() + ville.getResearchPointsForWeek());
+                if(ville.getResearchPointsForWeek() > 0.0) {
+                    ville.research += ville.getResearchPointsForWeek();
+                }
                 msUntilNextWeek = WEEK_LENGTH;
-                // RandomEvent randomEvent = new RandomEvent(ville, Evenement.SEISME);
-                // addAlert(true, randomEvent.createEvent());
             }
             printHeader(
                 Utils.WHITE_BACKGROUND + "  " + (int) ville.getMoney() + "$  " + Utils.GREEN_BACKGROUND + "  " + (int) Utils.getIncomeForWeek(ville.getResidents()) + "$/sem  " + Utils.WHITE_BACKGROUND,
@@ -65,7 +89,6 @@ public class Jeu extends Controls {
             printHeader(
                 Utils.WHITE_BACKGROUND + Utils.WHITE_BOLD + "Ville de " + ville.getName(),
                 Utils.BLUE_BACKGROUND + "  " + Utils.round(ville.getResearch(), 2) + " points de recherche (" + Utils.round(ville.getResearchPointsForWeek(), 2) +"/sem)");
-            
             if(screen != lastScreen) {
                 updateScreen();
             }            

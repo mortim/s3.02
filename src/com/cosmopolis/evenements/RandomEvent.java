@@ -42,7 +42,7 @@ public class RandomEvent {
                 int v4 = (int)(ville.getResidents()* 0.8 + (r.nextDouble() + (0.5 - (0.8))));
                 ville.setResidents(v4);
                 int v5=ville.disaster(20);
-                msg = "Une Tempête sans précédent vient de toucher votre ville. \nLes dégâts sont considérables... Vous perdez "+v5+" batiments et "+v4+" de vos habitants sont morts.";
+                msg = "Une Tempête sans précédent vient de toucher votre ville. \r\nLes dégâts sont considérables... Vous perdez "+v5+" batiments et "+v4+" de vos habitants sont morts.";
                 break;
             case BONVIVRE:
                 int v6 = (int)(ville.getResidents()* 1.4 + (r.nextDouble() + (-1.5 - (-1.4))));
@@ -53,7 +53,7 @@ public class RandomEvent {
                 int v7 = (int)(ville.getResidents()* 0.7 + (r.nextDouble() + (0.6 - (0.7))));
                 ville.setResidents(v7);
                 int v8 = ville.disaster(10);
-                msg = "Un terrible séisme s'est abatut sur votre ville ! \nLes dégâts sont considérables... Vous perdez "+v8+" batiments et "+v7+" de vos habitants sont morts.";
+                msg = "Un terrible séisme s'est abatut sur votre ville ! \r\nLes dégâts sont considérables... Vous perdez "+v8+" batiments et "+v7+" de vos habitants sont morts.";
                 break;
             
             case INCENDIE:
