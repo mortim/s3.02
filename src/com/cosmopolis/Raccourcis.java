@@ -8,6 +8,10 @@ public enum Raccourcis {
     PAVE_4(52),
     PAVE_5(53),
     PAVE_6(54),
+    PAVE_7(55),
+    PAVE_8(56),
+    PAVE_9(57),
+    PAVE_0(58),
     
     SPECIAUX_1(38),
     SPECIAUX_2(233),
@@ -16,7 +20,8 @@ public enum Raccourcis {
     SPECIAUX_5(40),
     SPECIAUX_6(45),
     
-    Q(113);
+    Q(113),
+    F(102);
 
 
     private int id_touche;

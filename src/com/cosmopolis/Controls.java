@@ -72,7 +72,6 @@ public class Controls {
       keyboardListener.start();
     } else {
       listeningConsole = false;
-      keyboardListener.stop();
 
       try {
         String[] commands = new String[] { "/bin/sh", "-c", "stty sane </dev/tty" };

@@ -12,8 +12,7 @@ Nous avons fait :
 * Terminer et régler les tests 
 
 ### Ce que nous allons faire durant le prochain sprint
-* Ajouter des évenments aléatoires
-* Implémenter des nouveaux batiments
+* Régler des bugs et faire du polymorphisme
 
 ## Rétrospective
 

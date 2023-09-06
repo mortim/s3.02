@@ -9,7 +9,7 @@ import java.util.Random;
 
 import com.cosmopolis.batiments.AbriBatiment;
 import com.cosmopolis.batiments.Batiment;
-import com.cosmopolis.batiments.CasernePoliceBatiment;
+import com.cosmopolis.batiments.PostePoliceBatiment;
 import com.cosmopolis.batiments.CasernePompierBatiment;
 import com.cosmopolis.batiments.CommerceBatiment;
 import com.cosmopolis.batiments.EcoleBatiment;
@@ -20,6 +20,8 @@ import com.cosmopolis.batiments.MaisonBatiment;
 import com.cosmopolis.batiments.TourismeBatiment;
 
 public class Ville {
+
+    public static final double RESEARCH_POINTS_TO_WIN = 1000.0;
 
     public Ville(String name) {
         this.name = name;
@@ -60,7 +62,7 @@ public class Ville {
     /**
      * Le nombre de points de recherches du joueur
      */
-    private int research = 0;
+    private double research = 0.0;
 
     private List<Batiment> bats = new ArrayList<>();
 
@@ -105,15 +107,19 @@ public class Ville {
     }
 
     public void setResidents(int residents) {
-        this.residents = residents;
+        this.residents = Math.max(0, residents);
     }
 
-    public int getResearch() {
+    public double getResearch() {
         return research;
     }
 
-    public void setResearch(int research) {
+    public void setResearch(double research) {
         this.research = research;
+    }
+
+    public void addResearch(double count) {
+        setResearch(getResearch() + count);
     }
 
     public int getTotalBatiments(String name) {
@@ -141,6 +147,7 @@ public class Ville {
         setMoney(money - amount);
     }
 
+
     public int nombreMaxHab(){
         int res=0;
         List<Batiment> list = getBats();
@@ -150,6 +157,13 @@ public class Ville {
         return res;
     }
 
+    /**
+     * @param choice Le numéro du bâtiment
+     * @return Renvoie un entier entre 0 et 2.
+     * 0 = tout est bon
+     * 1 = pas assez d'argent
+     * 2 = bâtiment pas découvert
+     */
     public int buy(int choice) {
         Batiment[] batiments = new Batiment[]{
             new MaisonBatiment(),
@@ -157,11 +171,10 @@ public class Ville {
             new ImmeubleBatiment(),
             new IndustrieBatiment(),
             new EcoleBatiment(),
-            new LaboratoireBatiment(),
-            new TourismeBatiment(),
-            new CasernePoliceBatiment(),
+            new AbriBatiment(),
+            new PostePoliceBatiment(),
             new CasernePompierBatiment(),
-            new AbriBatiment()
+            new LaboratoireBatiment(),
         };
 
         Batiment batiment = batiments[choice-1];
@@ -172,13 +185,20 @@ public class Ville {
                 Random rd = new Random();
                 setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
                 removeMoney(batiment.getTotalPrice(count));
-                return 1;
+                return 0;
             } else
-                return 2;
-        } else {
-            return 3;
+                return 1;
         }
         
+    }
+
+    public int disaster(int percent){
+        int tmp = (int) this.bats.size()/percent;
+        Random rd = new Random();
+        for (int i = 0; i<tmp; i++) {
+            this.bats.remove(rd.nextInt(this.bats.size()));
+        }
+        return tmp;
     }
     
 
@@ -203,5 +223,30 @@ public class Ville {
         this.popularity = (double)in.readObject();
         this.research = (int)in.readObject();
         this.bats = (ArrayList<Batiment>)in.readObject();
+    }
+
+    public double ecoleParHabitants() {
+        return (getTotalBatiments("EcoleBatiment") / (double) getResidents()) * 1000.0;
+    }
+    
+    public double abriParHabitants() {
+        return (getTotalBatiments("AbriBatiment") / (double) getResidents()) * 1000.0;
+    }
+    
+    public double policeParHabitants() {
+        return (getTotalBatiments("PoliceBatiment") / (double) getResidents()) * 1000.0;
+    }
+    
+    public double pompiersParHabitants() {
+        return (getTotalBatiments("Pompiers") / (double) getResidents()) * 1000.0;
+    }
+    
+
+    public boolean canWin() {
+        return getResearch() > Ville.RESEARCH_POINTS_TO_WIN;
+    }
+
+    public double getResearchPointsForWeek() {
+        return getTotalBatiments("LaboratoireBatiment") * 1.5 * ecoleParHabitants();
     }
 }
