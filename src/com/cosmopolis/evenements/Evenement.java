@@ -7,5 +7,7 @@ public enum Evenement {
     SURPOPULATION,
     TEMPETE,
     BONVIVRE,
-    SEISME
+    SEISME,
+    INCENDIE,
+    BRAQUAGE
 }
