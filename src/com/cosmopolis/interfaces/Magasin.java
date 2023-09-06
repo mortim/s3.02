@@ -25,6 +25,7 @@ public class Magasin extends Fenetre {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        println("\n\r                               Ville de " + ville.getName() + Utils.RESET);
         println(Utils.RESET);
         printLabel(1, 10, ville.getTotalBatiments("MaisonBatiment"), "maisons");
         printLabel(2, 50, ville.getTotalBatiments("CommerceBatiment"), "commerces");

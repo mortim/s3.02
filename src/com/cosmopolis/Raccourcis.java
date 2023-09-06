@@ -15,6 +15,7 @@ public enum Raccourcis {
     SPECIAUX_4(39),
     SPECIAUX_5(40),
     SPECIAUX_6(45),
+    
     Q(113);
 
 
