@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import com.cosmopolis.batiments.Batiment;
@@ -57,13 +58,13 @@ public class Ville {
      */
     private int research = 0;
 
-    private ArrayList<Batiment> bats = new ArrayList<>();
+    private List<Batiment> bats = new ArrayList<>();
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Batiment> getBats() {
+    public List<Batiment> getBats() {
         return bats;
     }
 
@@ -138,7 +139,7 @@ public class Ville {
 
     public int nombreMaxHab(){
         int res=0;
-        ArrayList<Batiment> list = getBats();
+        List<Batiment> list = getBats();
         for(int i=0; i<list.size(); i++){
             res+=list.get(i).getMaxResidents();
         }
@@ -146,30 +147,27 @@ public class Ville {
     }
 
     public boolean buy(int choice) {
-        ArrayList<Batiment> batiments = new ArrayList<>();
-        batiments.add(new MaisonBatiment());
-        batiments.add(new CommerceBatiment());
-        batiments.add(new ImmeubleBatiment());
-        batiments.add(new IndustrieBatiment());
-        batiments.add(new EcoleBatiment());
-        batiments.add(new LaboratoireBatiment());
-        /*
-         * Maison 1
-         * Commerces 2
-         * Immeuble
-         * Industrie
-         * Laboratoire
-         */
+        Batiment[] batiments = new Batiment[]{
+            new MaisonBatiment(),
+            new CommerceBatiment(),
+            new ImmeubleBatiment(),
+            new IndustrieBatiment(),
+            new EcoleBatiment(),
+            new LaboratoireBatiment()
+        };
 
-        Batiment batiment = batiments.get(choice-1);
-        if (this.money >= batiment.getPrice()) {
-            this.bats.add(batiment);
-            Random rd = new Random();
-            setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
-            removeMoney(batiment.getPrice());
-            return true;
-        } else
-            return false;
+        Batiment batiment = batiments[choice-1];
+        if(this.residents>=batiment.getLanding()){
+            if (this.money >= batiment.getPrice()) {
+                this.bats.add(batiment);
+                Random rd = new Random();
+                setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
+                removeMoney(batiment.getPrice());
+                return true;
+            } else
+                return false;
+        }
+        return false;
     }
 
     private void writeObject(ObjectOutputStream out) throws IOException {
