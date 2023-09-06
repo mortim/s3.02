@@ -42,6 +42,11 @@ public class RandomEvent {
                 ville.setResidents((int)(ville.getResidents()* 1.4 + (r.nextDouble() + (-1.5 - (-1.4)))));
                 msg = "Il fait bon vivre dans votre ville ! De nombreuses personnes décident de s'installer.";
                 break;
+            case SEISME:{
+                ville.setResidents((int)(ville.getResidents()* -1.3 + (r.nextDouble() + (-1.6 - (-1.3)))));
+                msg = "Un terrible séisme s'est abatut sur votre ville ! Les dégâts sont considérables...";
+                break;
+            }
         }
         return msg;
     }

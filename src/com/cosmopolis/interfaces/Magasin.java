@@ -44,8 +44,8 @@ public class Magasin extends Fenetre {
         printLabel(1, new MaisonBatiment());
         printLabel(2, new CommerceBatiment());
         printLabel(3, new ImmeubleBatiment());
-        printLabel(4, new EcoleBatiment());
-        printLabel(5, new IndustrieBatiment());
+        printLabel(4, new IndustrieBatiment());
+        printLabel(5, new EcoleBatiment());
         printLabel(6, new LaboratoireBatiment());
         printLabel(7, new AbriBatiment());
         printLabel(8, new CasernePoliceBatiment());

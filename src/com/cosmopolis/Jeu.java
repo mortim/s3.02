@@ -94,9 +94,10 @@ public class Jeu extends Controls {
     }
 
     public void tryToBuy(int choice) {
-        if(ville.buy(choice) == 3) {
+        int i = ville.buy(choice);
+        if(i == 3) {
             alerts.add(new Alert("Vous n'avez pas assez d'habitants!"));
-        } else if (ville.buy(choice) == 2){
+        } else if (i == 2){
             alerts.add(new Alert("Vous n'avez pas assez d'argent!"));
         }
     }
