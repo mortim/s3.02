@@ -180,6 +180,15 @@ public class Ville {
         }
         
     }
+
+    public int disaster(){
+        int tmp = (int) this.bats.size()/10;
+        Random rd = new Random();
+        for (int i = 0; i<tmp; i++) {
+            this.bats.remove(rd.nextInt(this.bats.size()));
+        }
+        return tmp;
+    }
     
 
     private void writeObject(ObjectOutputStream out) throws IOException {
