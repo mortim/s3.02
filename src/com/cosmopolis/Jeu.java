@@ -1,6 +1,6 @@
 package com.cosmopolis;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 import com.cosmopolis.interfaces.Click;
 import com.cosmopolis.interfaces.Fenetre;
@@ -66,7 +66,7 @@ public class Jeu extends Controls {
         }
     }
 
-    public void updateScreen() {
+    public void updateScreen() throws FileNotFoundException, InterruptedException {
         switch (screen) {
             case 0:
                 currentScreen = new Click();

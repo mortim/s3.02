@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import com.cosmopolis.Controls;
 import com.cosmopolis.Utils;
 
-public class Fusee extends Controls {
+public class Fusee extends Fenetre {
     public Fusee() throws FileNotFoundException, InterruptedException {
         String pret_au_decollage = Utils.lireFichier("src/com/cosmopolis/dessins/decollage_fusee/1.txt");
         String decollage = Utils.lireFichier("src/com/cosmopolis/dessins/decollage_fusee/2.txt");

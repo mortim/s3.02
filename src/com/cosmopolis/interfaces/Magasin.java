@@ -15,9 +15,9 @@ public class Magasin extends Fenetre {
     public void update() {
         System.out.print(Utils.BLACK_BOLD);
         try {
-            if(ville.getTotalHouses() == 0) {
+            if(ville.getTotalBatiments("MaisonBatiment") == 0) {
                 Utils.printTxt("src/com/cosmopolis/dessins/village/1.txt");
-            } else if(ville.getTotalHouses() < 5) {
+            } else if(ville.getTotalBatiments("MaisonBatiment") < 5) {
                 Utils.printTxt("src/com/cosmopolis/dessins/village/2.txt");
             } else {
                 Utils.printTxt("src/com/cosmopolis/dessins/village/3.txt");
@@ -26,13 +26,10 @@ public class Magasin extends Fenetre {
             e.printStackTrace();
         }
         System.out.println(Utils.RESET);
-        printLabel(1, 10, ville.getTotalHouses(), "maisons");
-        printLabel(2, 50, ville.getTotalShops(), "commerces");
-        printLabel(3, 250, ville.getTotalBuildings(), "immeubles");
-        printLabel(4, 50000, ville.getTotalLaboratories(), "laboratoires");
-        printLabel(5, 50000, ville.getTotalLaboratories(), "poste de polices");
-        printLabel(6, 50000, ville.getTotalLaboratories(), "centre anti-sismique");
-        printLabel(7, 50000, ville.getTotalLaboratories(), "caserne de pompiers");
+        printLabel(1, 10, ville.getTotalBatiments("MaisonBatiment"), "maisons");
+        printLabel(2, 50, ville.getTotalBatiments("CommerceBatiment"), "commerces");
+        printLabel(3, 250, ville.getTotalBatiments("ImmeubleBatiment"), "immeubles");
+        printLabel(4, 50000, ville.getTotalBatiments("LaboratoiresBatiment"), "laboratoires");
 
         // printProgressBar("Habitants", 0.25, Utils.GREEN_BACKGROUND, 30);
         // System.out.print("    ");
