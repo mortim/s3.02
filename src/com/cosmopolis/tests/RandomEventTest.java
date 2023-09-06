@@ -1,10 +1,10 @@
 package com.cosmopolis.tests;
 
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
 import com.cosmopolis.Ville;
 import com.cosmopolis.evenements.Evenement;
@@ -15,20 +15,19 @@ public class RandomEventTest {
     public RandomEvent r;
     public Ville v;
 
-    @BeforeEach
-    void init(){
-        v = new Ville("test nom");
+    public RandomEventTest(){
+        v = new Ville("test");
         v.setResidents(15);
         r = new RandomEvent(v, Evenement.MOURRANT);
     }
 
     @Test
-    void testGet(){
-        assertTrue(15 == v.getResidents());
+    public void testGet(){
+        assertEquals(15, v.getResidents());
     }
 
     @Test
-    void testCreateEvent(){
+    public void testCreateEvent(){
         r.createEvent();
         assertTrue(15 > v.getResidents());
     }
