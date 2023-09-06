@@ -150,7 +150,7 @@ public class Ville {
         return res;
     }
 
-    public boolean buy(int choice) {
+    public int buy(int choice) {
         Batiment[] batiments = new Batiment[]{
             new MaisonBatiment(),
             new CommerceBatiment(),
@@ -166,18 +166,21 @@ public class Ville {
 
         Batiment batiment = batiments[choice-1];
         int count = getTotalBatiments(batiment.getClass().getSimpleName());
-        if(this.residents>=batiment.getLanding()){
+        if(this.residents >= batiment.getLanding()){
             if (this.money >= batiment.getTotalPrice(count)) {
                 this.bats.add(batiment);
                 Random rd = new Random();
                 setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
                 removeMoney(batiment.getTotalPrice(count));
-                return true;
+                return 1;
             } else
-                return false;
+                return 2;
+        } else {
+            return 3;
         }
-        return false;
+        
     }
+    
 
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeObject(this.name);
