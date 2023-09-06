@@ -25,7 +25,7 @@ public class Magasin extends Fenetre {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(Utils.RESET);
+        println(Utils.RESET);
         printLabel(1, 10, ville.getTotalBatiments("MaisonBatiment"), "maisons");
         printLabel(2, 50, ville.getTotalBatiments("CommerceBatiment"), "commerces");
         printLabel(3, 250, ville.getTotalBatiments("ImmeubleBatiment"), "immeubles");
@@ -72,9 +72,5 @@ public class Magasin extends Fenetre {
             s += Utils.RED_BOLD;
         }
         println(s + count + " " + Utils.RESET + label + Utils.BLACK + " (" + (int) Utils.getBuildingPrice(price, count) + "$)" + Utils.RESET);
-    }
-
-    protected void println(Object content) {
-        System.out.print("\r" + content + "\r\n");
     }
 }

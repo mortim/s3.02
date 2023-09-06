@@ -66,7 +66,7 @@ public class Jeu extends Controls {
         }
     }
 
-    public void updateScreen() throws FileNotFoundException, InterruptedException {
+    public void updateScreen() throws InterruptedException, IOException {
         switch (screen) {
             case 0:
                 currentScreen = new Click();
@@ -78,6 +78,7 @@ public class Jeu extends Controls {
                 currentScreen = new Fusee();
                 break;  
         }
+        lastScreen = screen;
     }
 
     public void tryToBuy(int choice) {
@@ -99,6 +100,10 @@ public class Jeu extends Controls {
             tryToBuy(5);
         } else if(keyCode == Raccourcis.PAVE_6.getID() || keyCode == Raccourcis.SPECIAUX_6.getID()) {
             tryToBuy(6);
+        }
+        if(keyCode == Raccourcis.Q.getID()) {
+            println(Utils.RED_UNDERLINED + "Vous avez quitter le jeu." + Utils.RESET);
+            System.exit(0);
         }
         
         switch (keyCode) {
