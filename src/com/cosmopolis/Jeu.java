@@ -1,6 +1,8 @@
 package com.cosmopolis;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.cosmopolis.interfaces.Click;
 import com.cosmopolis.interfaces.Fenetre;
@@ -31,6 +33,7 @@ public class Jeu extends Controls {
      * Les données du joueur
      */
     public Ville ville;
+    public ArrayList<Alert> alerts = new ArrayList<>();
 
     
     Jeu() throws InterruptedException, IOException {
@@ -61,6 +64,14 @@ public class Jeu extends Controls {
                 updateScreen();
             }            
             currentScreen.update();
+            for (int i = alerts.size() - 1; i >= 0; i--) {
+                Alert alert = alerts.get(i);
+                printAlert(alert.label);
+                alert.timeLeft -= 100;
+                if(alert.timeLeft < 0) {
+                    alerts.remove(alert);
+                }
+            }
             sleep(100);
             msUntilNextWeek -= 100;
         }
@@ -83,7 +94,7 @@ public class Jeu extends Controls {
 
     public void tryToBuy(int choice) {
         if(!ville.buy(choice)) {
-            printAlert("Vous n'avez pas assez d'argent!");
+            alerts.add(new Alert("Vous n'avez pas assez d'argent!"));
         };
     }
 
