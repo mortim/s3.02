@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.cosmopolis.batiments.AbriBatiment;
 import com.cosmopolis.batiments.Batiment;
+import com.cosmopolis.batiments.CasernePoliceBatiment;
+import com.cosmopolis.batiments.CasernePompierBatiment;
 import com.cosmopolis.batiments.CommerceBatiment;
 import com.cosmopolis.batiments.EcoleBatiment;
 import com.cosmopolis.batiments.ImmeubleBatiment;
@@ -153,7 +156,10 @@ public class Ville {
             new ImmeubleBatiment(),
             new IndustrieBatiment(),
             new EcoleBatiment(),
-            new LaboratoireBatiment()
+            new LaboratoireBatiment(),
+            new AbriBatiment(),
+            new CasernePoliceBatiment(),
+            new CasernePompierBatiment()
         };
 
         Batiment batiment = batiments[choice-1];
