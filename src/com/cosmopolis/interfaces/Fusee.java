@@ -59,7 +59,7 @@ public class Fusee extends Fenetre {
     public void decollage() throws IOException, InterruptedException {
         println(Utils.BLUE_BOLD + "Décollage dans...");
         
-        for(int i = 1; i <= 3; i++) {
+        for(int i = 3; i >= 1; i--) {
             clearMyScreen();
             println("Décollage dans..." + i);
             Utils.printTxt(PRET_AU_DECOLLAGE);
