@@ -6,5 +6,6 @@ public enum Evenement {
     TOURISTE,
     SURPOPULATION,
     TEMPETE,
-    BONVIVRE
+    BONVIVRE,
+    SEISME
 }
