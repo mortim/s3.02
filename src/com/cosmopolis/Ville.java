@@ -189,7 +189,16 @@ public class Ville {
             } else
                 return 1;
         }
-        return 2;
+        
+    }
+
+    public int disaster(int percent){
+        int tmp = (int) this.bats.size()/percent;
+        Random rd = new Random();
+        for (int i = 0; i<tmp; i++) {
+            this.bats.remove(rd.nextInt(this.bats.size()));
+        }
+        return tmp;
     }
     
 
