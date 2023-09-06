@@ -1,6 +1,7 @@
 package com.cosmopolis;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import com.cosmopolis.batiments.Batiment;
@@ -54,13 +55,13 @@ public class Ville {
      */
     private int research = 0;
 
-    private ArrayList<Batiment> bats = new ArrayList<>();
+    private List<Batiment> bats = new ArrayList<>();
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Batiment> getBats() {
+    public List<Batiment> getBats() {
         return bats;
     }
 
@@ -135,7 +136,7 @@ public class Ville {
 
     public int nombreMaxHab(){
         int res=0;
-        ArrayList<Batiment> list = getBats();
+        List<Batiment> list = getBats();
         for(int i=0; i<list.size(); i++){
             res+=list.get(i).getBarHab();
         }
