@@ -9,7 +9,7 @@ import java.util.Random;
 
 import com.cosmopolis.batiments.AbriBatiment;
 import com.cosmopolis.batiments.Batiment;
-import com.cosmopolis.batiments.CasernePoliceBatiment;
+import com.cosmopolis.batiments.PostePoliceBatiment;
 import com.cosmopolis.batiments.CasernePompierBatiment;
 import com.cosmopolis.batiments.CommerceBatiment;
 import com.cosmopolis.batiments.EcoleBatiment;
@@ -107,7 +107,7 @@ public class Ville {
     }
 
     public void setResidents(int residents) {
-        this.residents = residents;
+        this.residents = Math.max(0, residents);
     }
 
     public double getResearch() {
@@ -171,11 +171,10 @@ public class Ville {
             new ImmeubleBatiment(),
             new IndustrieBatiment(),
             new EcoleBatiment(),
-            new LaboratoireBatiment(),
-            new TourismeBatiment(),
-            new CasernePoliceBatiment(),
+            new AbriBatiment(),
+            new PostePoliceBatiment(),
             new CasernePompierBatiment(),
-            new AbriBatiment()
+            new LaboratoireBatiment(),
         };
 
         Batiment batiment = batiments[choice-1];
@@ -217,7 +216,28 @@ public class Ville {
         this.bats = (ArrayList<Batiment>)in.readObject();
     }
 
+    public double ecoleParHabitants() {
+        return (getTotalBatiments("EcoleBatiment") / (double) getResidents()) * 1000.0;
+    }
+    
+    public double abriParHabitants() {
+        return (getTotalBatiments("AbriBatiment") / (double) getResidents()) * 1000.0;
+    }
+    
+    public double policeParHabitants() {
+        return (getTotalBatiments("PoliceBatiment") / (double) getResidents()) * 1000.0;
+    }
+    
+    public double pompiersParHabitants() {
+        return (getTotalBatiments("Pompiers") / (double) getResidents()) * 1000.0;
+    }
+    
+
     public boolean canWin() {
         return getResearch() > Ville.RESEARCH_POINTS_TO_WIN;
+    }
+
+    public double getResearchPointsForWeek() {
+        return getTotalBatiments("LaboratoireBatiment") * 1.5 * ecoleParHabitants();
     }
 }

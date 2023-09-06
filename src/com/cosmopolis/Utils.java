@@ -58,10 +58,6 @@ public class Utils {
     public static float getIncomeForWeek(int residents) {
         return (float) residents * 0.25f;
     }
-    
-    public static float getResearchPointsForWeek(int laboratories) {
-        return (float) ((float) laboratories * 1.5);
-    }
 
     
     /**

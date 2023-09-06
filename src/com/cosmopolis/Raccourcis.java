@@ -11,6 +11,7 @@ public enum Raccourcis {
     PAVE_7(55),
     PAVE_8(56),
     PAVE_9(57),
+    PAVE_0(58),
     
     SPECIAUX_1(38),
     SPECIAUX_2(233),

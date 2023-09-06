@@ -8,7 +8,7 @@ import com.cosmopolis.Utils;
 import com.cosmopolis.Ville;
 import com.cosmopolis.batiments.AbriBatiment;
 import com.cosmopolis.batiments.Batiment;
-import com.cosmopolis.batiments.CasernePoliceBatiment;
+import com.cosmopolis.batiments.PostePoliceBatiment;
 import com.cosmopolis.batiments.CasernePompierBatiment;
 import com.cosmopolis.batiments.CommerceBatiment;
 import com.cosmopolis.batiments.EcoleBatiment;
@@ -46,19 +46,23 @@ public class Magasin extends Fenetre {
         printLabel(3, new ImmeubleBatiment());
         printLabel(4, new IndustrieBatiment());
         printLabel(5, new EcoleBatiment());
-        printLabel(6, new LaboratoireBatiment());
-        // printLabel(7, new AbriBatiment());
-        // printLabel(8, new CasernePoliceBatiment());
-        // printLabel(9, new CasernePompierBatiment());
-        // System.out.print("\r\n");
-        // Random random = new Random();
-        // printProgressBar("Protection surpopulation", random.nextDouble(), Utils.GREEN_BACKGROUND, 30);
-        // System.out.print("    ");
-        // printProgressBar("Sécurité", random.nextDouble(), Utils.BLUE_BACKGROUND, 30);
-        // System.out.print("\r\n");
-        // printProgressBar("Protection aux incendies", random.nextDouble(), Utils.RED_BACKGROUND, 30);
-        // System.out.print("    ");
-        // printProgressBar("Protection aux séismes", random.nextDouble(), Utils.YELLOW_BACKGROUND, 30);
+
+        printLabel(6, new AbriBatiment());
+        printLabel(7, new PostePoliceBatiment());
+        printLabel(8, new CasernePompierBatiment());
+        
+        printLabel(9, new LaboratoireBatiment());
+        System.out.print("\r\n");
+        Random random = new Random();
+        if(ville.getResidents() > 1) {
+            printProgressBar("Education", ville.ecoleParHabitants(), Utils.GREEN_BACKGROUND, 30);
+            System.out.print("    ");
+            printProgressBar("Protection aux séismes", ville.abriParHabitants(), Utils.YELLOW_BACKGROUND, 30);
+            System.out.print("\r\n");
+            printProgressBar("Sécurité", ville.policeParHabitants(), Utils.BLUE_BACKGROUND, 30);
+            printProgressBar("Protection aux incendies", ville.pompiersParHabitants(), Utils.RED_BACKGROUND, 30);
+            System.out.print("    ");
+        }
 
         
         // printAlert("7 de vos habitants sont morts");

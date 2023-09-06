@@ -1,7 +1,7 @@
 package com.cosmopolis.batiments;
 
-public class CasernePoliceBatiment extends Batiment  {
-    public CasernePoliceBatiment(){
+public class PostePoliceBatiment extends Batiment  {
+    public PostePoliceBatiment(){
         super(3000, 5, 10, 2000, 30, "poste de police");
     }
 
