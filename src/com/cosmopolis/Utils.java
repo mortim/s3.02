@@ -56,7 +56,7 @@ public class Utils {
      * @return Renvoie le nombre total d'argents gagnés par un clic.
      */
     public static float getIncomeForWeek(int residents) {
-        return (float) residents * 0.25f;
+        return (float) residents * 0.6f;
     }
 
     
@@ -69,7 +69,7 @@ public class Utils {
     }
 
     public static float getBuildingPrice(float basePrice, int count) {
-        return (float) (basePrice * Math.pow(1.04, count));
+        return (float) (basePrice * Math.pow(1.035, count));
     }
 
 

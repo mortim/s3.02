@@ -247,6 +247,6 @@ public class Ville {
 
     public double getResearchPointsForWeek() {
         // return 10.0;
-        return getTotalBatiments("LaboratoireBatiment") * 1.5 * Math.min(ecoleParHabitants(), 1.0);
+        return getTotalBatiments("LaboratoireBatiment") * 2.5 * Math.min(ecoleParHabitants(), 1.0);
     }
 }
