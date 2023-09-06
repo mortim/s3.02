@@ -42,6 +42,7 @@ public class Jeu extends Controls {
         Random random = new Random();
         ville = new Ville(nom);
         enableKeyTypedInConsole(true);
+
         ville.setMoney(500);
         while (true) {
             clearMyScreen();
@@ -55,16 +56,18 @@ public class Jeu extends Controls {
                     //     RandomEvent randomEvent = new RandomEvent(ville, Evenement.SEISME);
                     //     addAlert(true, randomEvent.createEvent());
                     // }
-                    if(random.nextDouble() > Math.pow(ville.abriParHabitants(), 2)) {
-                        RandomEvent randomEvent = new RandomEvent(ville, Evenement.SEISME);
-                        addAlert(true, randomEvent.createEvent());
-                        evenementPassee = true;
-                    } else if(random.nextDouble() > Math.pow(ville.policeParHabitants(), 2)) {
+                    if(random.nextDouble() > Math.pow(ville.policeParHabitants(), 2)) {
                         RandomEvent randomEvent = new RandomEvent(ville, Evenement.BRAQUAGE);
                         addAlert(true, randomEvent.createEvent());
                         evenementPassee = true;
-                    } else if(random.nextDouble() > Math.pow(ville.pompiersParHabitants(), 2)) {
+                    } else
+                    if(random.nextDouble() > Math.pow(ville.pompiersParHabitants(), 2)) {
                         RandomEvent randomEvent = new RandomEvent(ville, Evenement.INCENDIE);
+                        addAlert(true, randomEvent.createEvent());
+                        evenementPassee = true;
+                    } else
+                    if (random.nextDouble() > Math.pow(ville.abriParHabitants(), 2)) {
+                        RandomEvent randomEvent = new RandomEvent(ville, Evenement.SEISME);
                         addAlert(true, randomEvent.createEvent());
                         evenementPassee = true;
                     }
@@ -143,6 +146,7 @@ public class Jeu extends Controls {
     }
 
     protected void keyTypedInConsole(int keyCode) throws InterruptedException, IOException {
+        // System.out.println(keyCode);
         switch (screen) {
             case -1:
                 if(keyCode == Raccourcis.PAVE_1.getID() || keyCode == Raccourcis.PAVE_1.getID()) {
@@ -166,13 +170,13 @@ public class Jeu extends Controls {
                     tryToBuy(5);
                 } else if(keyCode == Raccourcis.PAVE_6.getID() || keyCode == Raccourcis.SPECIAUX_6.getID()) {
                     tryToBuy(6);
-                } else if(keyCode == Raccourcis.PAVE_7.getID() || keyCode == Raccourcis.SPECIAUX_4.getID()) {
+                } else if(keyCode == Raccourcis.PAVE_7.getID() || keyCode == Raccourcis.SPECIAUX_7.getID()) {
                     tryToBuy(7);
-                } else if(keyCode == Raccourcis.PAVE_8.getID() || keyCode == Raccourcis.SPECIAUX_5.getID()) {
+                } else if(keyCode == Raccourcis.PAVE_8.getID() || keyCode == Raccourcis.SPECIAUX_8.getID()) {
                     tryToBuy(8);
-                } else if(keyCode == Raccourcis.PAVE_9.getID() || keyCode == Raccourcis.SPECIAUX_6.getID()) {
+                } else if(keyCode == Raccourcis.PAVE_9.getID() || keyCode == Raccourcis.SPECIAUX_9.getID()) {
                     tryToBuy(9);
-                } else if(keyCode == Raccourcis.PAVE_0.getID() || keyCode == Raccourcis.SPECIAUX_6.getID()) {
+                } else if(keyCode == Raccourcis.PAVE_0.getID() || keyCode == Raccourcis.SPECIAUX_0.getID()) {
                     tryToBuy(10);
                 }
             
@@ -191,6 +195,16 @@ public class Jeu extends Controls {
                     }
                 }
         }
+        if(keyCode == Raccourcis.S.getID()) { // sauvegarder
+            Sauvegarde sauvegarde = new Sauvegarde("/tmp/save.dat");
+            sauvegarde.sauvegarder(ville);
+        }
+        
+        if(keyCode == Raccourcis.L.getID()) { // charger
+            ville = new Sauvegarde("/tmp/save.dat").lire();
+        }
+
+
         if(keyCode == Raccourcis.Q.getID()) {
             Utils.quitter();
         }

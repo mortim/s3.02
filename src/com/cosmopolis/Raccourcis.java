@@ -19,7 +19,13 @@ public enum Raccourcis {
     SPECIAUX_4(39),
     SPECIAUX_5(40),
     SPECIAUX_6(45),
+    SPECIAUX_7(232),
+    SPECIAUX_8(95),
+    SPECIAUX_9(231),
+    SPECIAUX_0(224),
     
+    S(115),
+    L(108),
     Q(113),
     F(102);
 

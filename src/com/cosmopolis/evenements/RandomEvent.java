@@ -37,7 +37,7 @@ public class RandomEvent {
                 msg = "Votre ville est si belle qu'elle accueille "+(vv2-v2)+" touristes ! Attention au facteur de surpopulation.";
                 break;
             case SURPOPULATION:
-                int v3 = (int)(ville.getResidents()* 0.6 + (r.nextDouble() + (0.2 - (0.6))));
+                int v3 = (int)(ville.getResidents()* 0.6 + (r.nextDouble() + (0.4 - (0.6))));
                 int vv3 = ville.getResidents();
                 ville.setResidents(v3);
                 msg = "Votre ville à dépassé son seuil de peuplement. C'est désastreux, "+(vv3-v3)+" de vos habitants sont morts.";
@@ -50,7 +50,7 @@ public class RandomEvent {
                 msg = "Une Tempête sans précédent vient de toucher votre ville. \nLes dégâts sont considérables... Vous perdez "+v5+" batiments et "+v4+" de vos habitants sont morts.";
                 break;
             case BONVIVRE:
-                int v6 = (int)(ville.getResidents()* 1.4 + (r.nextDouble() + (-1.5 - (-1.4))));
+                int v6 = (int)(ville.getResidents()* 1.4 + (r.nextDouble() + (1.5 - (1.4))));
                 int vv5 = ville.getResidents();
                 ville.setResidents(v6);
                 msg = "Il fait bon vivre dans votre ville ! "+(vv5-v6)+" personnes décident de s'installer.";
@@ -63,7 +63,7 @@ public class RandomEvent {
                 msg = "Un terrible séisme s'est abatut sur votre ville ! \nLes dégâts sont considérables... Vous perdez "+v8+" batiments et "+v7+" de vos habitants sont morts.";
                 break;
             case INCENDIE:
-                int v9 = (int)(ville.getResidents()* -0.8 + (r.nextDouble() + (0.6 - (0.8))));
+                int v9 = (int)(ville.getResidents()* 0.8 + (r.nextDouble() + (0.6 - (0.8))));
                 int vv7 = ville.getResidents();
                 ville.setResidents(v9);
                 int v10 = ville.disaster(30);
