@@ -10,6 +10,7 @@ public abstract class Batiment implements Serializable {
     private int min_residents;
     private int max_residents;
     private int landing;
+    private int barhab;
 
     /**
      * @param price Prix du bâtiment
@@ -17,11 +18,12 @@ public abstract class Batiment implements Serializable {
      * @param max_residents Nombre maximum d'habitants
      * @param landing Palier en nombre d'habitants
      */
-    public Batiment(int price, int min_residents, int max_residents, int landing) {
+    public Batiment(int price, int min_residents, int max_residents, int landing, int barhab) {
         this.price = price;
         this.min_residents = min_residents;
         this.max_residents = max_residents;
         this.landing = landing;
+        this.barhab=barhab;
     }
 
     public Batiment(int price, int landing){
@@ -69,6 +71,7 @@ public abstract class Batiment implements Serializable {
         out.writeObject(this.landing);   
     }
 
+    public int getBarHab(){return this.barhab;}
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         this.price = (float)in.readObject();
         this.min_residents = (int)in.readObject();
