@@ -36,6 +36,7 @@ public class VilleTest {
     }
     @Test
     void testGettersSetters(){
+        v.setResidents(250);
         v.buy(2);
         assertEquals(1, v.getBats().size());
         v.buy(1);
