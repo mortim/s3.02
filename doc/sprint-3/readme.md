@@ -10,7 +10,7 @@ Nous avons fait :
 * Tests pour les fonctions issues de la classe Ville
 
 ### Ce que nous allons faire durant le prochain sprint
-Travailler sur la sérialisation et assembler nos classes pour que notre jeu puisse tourner
+Travailler sur la sérialisation et l'interface utilisateur
 
 ## Rétrospective
 
