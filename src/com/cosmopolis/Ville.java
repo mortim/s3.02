@@ -189,7 +189,7 @@ public class Ville {
             } else
                 return 1;
         }
-        
+        return 2;
     }
 
     public int disaster(int percent){
@@ -234,11 +234,11 @@ public class Ville {
     }
     
     public double policeParHabitants() {
-        return (getTotalBatiments("PoliceBatiment") / (double) getResidents()) * 1000.0;
+        return (getTotalBatiments("PostePoliceBatiment") / (double) getResidents()) * 1000.0;
     }
     
     public double pompiersParHabitants() {
-        return (getTotalBatiments("Pompiers") / (double) getResidents()) * 1000.0;
+        return (getTotalBatiments("CasernePompierBatiment") / (double) getResidents()) * 1000.0;
     }
     
 
@@ -247,6 +247,6 @@ public class Ville {
     }
 
     public double getResearchPointsForWeek() {
-        return getTotalBatiments("LaboratoireBatiment") * 1.5 * ecoleParHabitants();
+        return getTotalBatiments("LaboratoireBatiment") * 1.5 * Math.min(ecoleParHabitants(), 1.0);
     }
 }

@@ -53,7 +53,7 @@ public class Jeu extends Controls {
             if(msUntilNextWeek < 0) {
                 ville.incrementWeek();
                 ville.addMoney(Utils.getIncomeForWeek(ville.getResidents()));
-                ville.addResearch(ville.getResearchPointsForWeek());
+                ville.setResearch(ville.getResearch() + ville.getResearchPointsForWeek());
                 msUntilNextWeek = WEEK_LENGTH;
                 // RandomEvent randomEvent = new RandomEvent(ville, Evenement.SEISME);
                 // addAlert(true, randomEvent.createEvent());
@@ -64,7 +64,7 @@ public class Jeu extends Controls {
             
             printHeader(
                 Utils.WHITE_BACKGROUND + Utils.WHITE_BOLD + "Ville de " + ville.getName(),
-                Utils.BLUE_BACKGROUND + "  " + ville.getResearch() + " points de recherche (" + ville.getResearchPointsForWeek() +"/sem)");
+                Utils.BLUE_BACKGROUND + "  " + Utils.round(ville.getResearch(), 2) + " points de recherche (" + Utils.round(ville.getResearchPointsForWeek(), 2) +"/sem)");
             
             if(screen != lastScreen) {
                 updateScreen();

@@ -60,8 +60,8 @@ public class Magasin extends Fenetre {
             printProgressBar("Protection aux séismes", ville.abriParHabitants(), Utils.YELLOW_BACKGROUND, 30);
             System.out.print("\r\n");
             printProgressBar("Sécurité", ville.policeParHabitants(), Utils.BLUE_BACKGROUND, 30);
-            printProgressBar("Protection aux incendies", ville.pompiersParHabitants(), Utils.RED_BACKGROUND, 30);
             System.out.print("    ");
+            printProgressBar("Protection aux incendies", ville.pompiersParHabitants(), Utils.RED_BACKGROUND, 30);
         }
 
         
