@@ -94,9 +94,12 @@ public class Jeu extends Controls {
     }
 
     public void tryToBuy(int choice) {
-        if(!ville.buy(choice)) {
+        int i = ville.buy(choice);
+        if(i == 3) {
+            alerts.add(new Alert("Vous n'avez pas assez d'habitants!"));
+        } else if (i == 2){
             alerts.add(new Alert("Vous n'avez pas assez d'argent!"));
-        };
+        }
     }
 
     protected void keyTypedInConsole(int keyCode) throws InterruptedException, IOException {
