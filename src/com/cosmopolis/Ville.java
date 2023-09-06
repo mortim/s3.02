@@ -17,7 +17,6 @@ import com.cosmopolis.batiments.ImmeubleBatiment;
 import com.cosmopolis.batiments.IndustrieBatiment;
 import com.cosmopolis.batiments.LaboratoireBatiment;
 import com.cosmopolis.batiments.MaisonBatiment;
-import com.cosmopolis.batiments.TourismeBatiment;
 
 public class Ville {
 
@@ -248,7 +247,7 @@ public class Ville {
 
     public double getResearchPointsForWeek() {
         // return 10.0;
-        return getTotalBatiments("LaboratoireBatiment") * 2.5 * Math.min(ecoleParHabitants(), 1.0);
+        return getTotalBatiments("LaboratoireBatiment") * 8.0 * Math.min(ecoleParHabitants(), 1.0);
     }
 
     public int getTotalBar() {

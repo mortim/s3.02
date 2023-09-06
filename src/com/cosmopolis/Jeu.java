@@ -16,7 +16,7 @@ public class Jeu extends Controls {
     /**
      * La longueur d'une semaine en millisecondes.
      */
-    public final int WEEK_LENGTH = 3000;
+    public final int WEEK_LENGTH = 1000;
 
     public final int TICK_LENGTH = 100;
     /**
@@ -44,7 +44,7 @@ public class Jeu extends Controls {
         ville = new Ville(nom);
         enableKeyTypedInConsole(true);
 
-        ville.setMoney(50000);
+        ville.setMoney(500);
         while (true) {
             clearMyScreen();
             
@@ -102,12 +102,14 @@ public class Jeu extends Controls {
                 updateScreen();
             }            
             currentScreen.update();
-            for (int i = alerts.size() - 1; i >= 0; i--) {
-                Alert alert = alerts.get(i);
-                printAlert(alert.label, alert.important, alert.positive);
-                alert.timeLeft -= TICK_LENGTH;
-                if(alert.timeLeft < 0) {
-                    alerts.remove(alert);
+            if(screen != 2) {
+                for (int i = alerts.size() - 1; i >= 0; i--) {
+                    Alert alert = alerts.get(i);
+                    printAlert(alert.label, alert.important, alert.positive);
+                    alert.timeLeft -= TICK_LENGTH;
+                    if(alert.timeLeft < 0) {
+                        alerts.remove(alert);
+                    }
                 }
             }
             

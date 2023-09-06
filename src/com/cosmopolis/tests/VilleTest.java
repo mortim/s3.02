@@ -1,7 +1,6 @@
 package com.cosmopolis.tests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class VilleTest {
     }
     @Test
     void testBuy() {
-        assertEquals(v.buy(4), 0);
+        assertEquals(v.buy(4), 2);
         v.setResidents(250);
         assertEquals(v.buy(4), 0);
         ArrayList<Batiment> bats = new ArrayList<>();

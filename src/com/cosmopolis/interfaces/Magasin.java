@@ -24,16 +24,31 @@ public class Magasin extends Fenetre {
         this.ville = ville;
     }
 
+    public int frame = 0;
+    public int half = 0;
+
     public void update() {
+        if(half == 0) {
+            frame += 1;
+            half = 3;
+        } else {
+            half -= 1;
+        }
+        
+        frame = frame % 12;
+
         System.out.print(Utils.BLACK_BOLD);
         try {
-            if(ville.getTotalBatiments("MaisonBatiment") == 0) {
-                Utils.printTxt("src/com/cosmopolis/dessins/village/1.txt");
-            } else if(ville.getTotalBatiments("MaisonBatiment") < 5) {
-                Utils.printTxt("src/com/cosmopolis/dessins/village/2.txt");
-            } else {
-                Utils.printTxt("src/com/cosmopolis/dessins/village/3.txt");
+            if(ville.getResidents() == 0) {
+                Utils.printTxt("src/com/cosmopolis/dessins/village/arbre.txt");
+            } else if(ville.getResidents() <= 10) {
+                Utils.printTxt("src/com/cosmopolis/dessins/village/maison.txt");
+            } else if(ville.getResidents() <= 1000) {
+                Utils.printTxt("src/com/cosmopolis/dessins/village/village.txt");
+            } else if(ville.getResidents() >= 1000) {
+                Utils.printTxt("src/com/cosmopolis/dessins/village/" + frame +".txt");
             }
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,7 +116,7 @@ public class Magasin extends Fenetre {
             } else {
                 s += Utils.RED_BOLD;
             }
-            println(s + count + " " + Utils.RESET + batiment.getLabel() + Utils.BLACK + " (" + (int) batiment.getTotalPrice(count) + "$)" + Utils.RESET);
+            println(s + count + " " + Utils.RESET + batiment.getLabel() + Utils.BLACK + " (" + (int) batiment.getTotalPrice(count) + "€)" + Utils.RESET);
         } else {
             println(Utils.RED_BOLD + "    [???]" + Utils.BLACK + " Il vous manque " + Utils.RED + (batiment.getLanding() - ville.getResidents()) + Utils.BLACK + " habitants pour ce bâtiment!");
         }

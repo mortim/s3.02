@@ -9,6 +9,20 @@
             "name": "DefilementVille",
             "request": "launch",
             "mainClass": "com.cosmopolis.interfaces.DefilementVille",
+            "projectName": "Cosmopolis_438bed74"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "com.cosmopolis.App",
+            "projectName": "s3.01_a1854f44"
+        },
+        {
+            "type": "java",
+            "name": "DefilementVille",
+            "request": "launch",
+            "mainClass": "com.cosmopolis.interfaces.DefilementVille",
             "projectName": "s3.01_a1854f44"
         },
         {
