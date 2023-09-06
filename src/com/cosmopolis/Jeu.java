@@ -23,7 +23,7 @@ public class Jeu extends Controls {
     /**
      * L'écran sur laquelle le joueur se trouve actuellement (0 = cliquer, 1 = acheter des bâtiments, 2 = envoyer une fusée)
      */
-    public int screen = 1;
+    public int screen = 0;
     public int lastScreen = -99;
 
     public Fenetre currentScreen;
@@ -44,20 +44,24 @@ public class Jeu extends Controls {
         // }
         ville = new Ville("Lille");
         enableKeyTypedInConsole(true);
-        ville.setMoney(100);
+        ville.setMoney(1000000);
         while (true) {
             clearMyScreen();
 
             if(msUntilNextWeek < 0) {
                 ville.incrementWeek();
                 ville.addMoney(Utils.getIncomeForWeek(ville.getResidents()));
+                ville.addResearch(Utils.getResearchPointsForWeek(ville.getTotalBatiments("LaboratoireBatiment")));
                 msUntilNextWeek = WEEK_LENGTH;
             }
             printHeader(
-                "  " + (int) ville.getMoney() + "$  " + Utils.GREEN_BACKGROUND + "  " + (int) Utils.getIncomeForWeek(ville.getResidents()) + "$/sem  " + Utils.WHITE_BACKGROUND,
+                Utils.WHITE_BACKGROUND + "  " + (int) ville.getMoney() + "$  " + Utils.GREEN_BACKGROUND + "  " + (int) Utils.getIncomeForWeek(ville.getResidents()) + "$/sem  " + Utils.WHITE_BACKGROUND,
                 Utils.PURPLE_BACKGROUND + "  " + ville.getResidents() + " hab.  " + Utils.BLUE_BACKGROUND + "  semaine n°" + ville.getWeek() + "  \r" + Utils.RESET);
-            // printHeader("← Cliquer / Ville / Fusée →", "Utilisez les flèches pour changer de menu");
-
+            
+            printHeader(
+                Utils.WHITE_BACKGROUND + Utils.WHITE_BOLD + "Ville de " + ville.getName(),
+                Utils.BLUE_BACKGROUND + "  " + ville.getResearch() + " points de recherche (" + Utils.getResearchPointsForWeek(ville.getTotalBatiments("LaboratoireBatiment")) +"/s)");
+            
             if(screen != lastScreen) {
                 updateScreen();
             }            
@@ -65,14 +69,14 @@ public class Jeu extends Controls {
             for (int i = alerts.size() - 1; i >= 0; i--) {
                 Alert alert = alerts.get(i);
                 printAlert(alert.label);
-                alert.timeLeft -= 100;
+                alert.timeLeft -= TICK_LENGTH;
                 if(alert.timeLeft < 0) {
                     alerts.remove(alert);
                 }
             }
             
-            sleep(100);
-            msUntilNextWeek -= 100;
+            sleep(TICK_LENGTH);
+            msUntilNextWeek -= TICK_LENGTH;
         }
     }
 
@@ -87,18 +91,24 @@ public class Jeu extends Controls {
                 currentScreen = new Magasin(ville);
                 break;
             case 2:
-                currentScreen = new Fusee();
+                currentScreen = new Fusee(ville);
                 break;  
         }
         lastScreen = screen;
     }
 
     public void tryToBuy(int choice) {
-        int i = ville.buy(choice);
-        if(i == 3) {
-            alerts.add(new Alert("Vous n'avez pas assez d'habitants!"));
-        } else if (i == 2){
-            alerts.add(new Alert("Vous n'avez pas assez d'argent!"));
+        int result = ville.buy(choice);
+        if(result == 1) {
+            addAlert(false, "Vous n'avez pas assez d'argent.");
+        } else if(result == 2) {
+            addAlert(false, "Vous n'avez pas assez d'habitants.");
+        }
+    }
+
+    public void addAlert(boolean important, String message) {
+        if(alerts.size() <= 5) {
+            alerts.add(new Alert(message));
         }
     }
 
@@ -128,6 +138,18 @@ public class Jeu extends Controls {
                     tryToBuy(6);
                 }
                 break;
+            case 2:
+                if(keyCode == Raccourcis.F.getID()) {
+                    Fusee f = (Fusee) currentScreen;
+                    if(ville.getMoney() < 1000.0) {
+                        alerts.add(new Alert("Vous n'avez pas assez d'argent!"));
+                        return;
+                    }
+                    if(f.state == Fusee.State.NONE || (f.state == Fusee.State.END && !ville.canWin())) {
+                        f.send();
+                        ville.removeMoney(1000.0f);
+                    }
+                }
         }
         if(keyCode == Raccourcis.Q.getID()) {
             Utils.quitter();
@@ -159,7 +181,7 @@ public class Jeu extends Controls {
      */
     public void printHeader(String left_label, String right_label) {
 
-        System.out.print(Utils.WHITE_BACKGROUND + left_label);
+        System.out.print(left_label);
         for (int i = 0; i < Utils.SCREEN_WIDTH - (left_label.length() + right_label.length()); i++) {
             System.out.print(' ');
         }

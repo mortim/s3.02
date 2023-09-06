@@ -31,7 +31,7 @@ public abstract class Batiment implements Serializable {
         this.label = label;
     }
 
-    public Batiment(int price, int landing){
+    public Batiment(int price, int landing, String label){
         this.price = price;
         this.landing = landing;
     }

@@ -4,8 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import com.cosmopolis.Utils;
+import com.cosmopolis.Ville;
 
 public class Fusee extends Fenetre {
+
+    public Ville ville;
     private final String DANS_L_ESPACE = "src/com/cosmopolis/dessins/decollage_fusee/4.txt";
     // -- Décollage
     private final String PRET_AU_DECOLLAGE = "src/com/cosmopolis/dessins/decollage_fusee/1.txt";
@@ -23,30 +26,58 @@ public class Fusee extends Fenetre {
     private final String EXPLOSION_2 = "src/com/cosmopolis/dessins/crash_fusee/7.txt";
     private final String EXPLOSION_3 = "src/com/cosmopolis/dessins/crash_fusee/8.txt";
 
-    public boolean playing_animation = false;
+    public enum State {
+        NONE,
+        PLAY,
+        END
+    }
 
-    public void update(boolean success) throws IOException, InterruptedException {
-        if(playing_animation)
+    public State state = State.NONE;
+
+    public Fusee(Ville ville) {
+        this.ville = ville;
+    }
+
+
+    public void update() throws IOException, InterruptedException {
+        println(Utils.BLUE_BOLD);
+        if(state == State.NONE) {
+            println("Envoyer une fusée ?");
+            println("Cela vous coûtera 1000€");
+            println("Appuyez sur " + Utils.WHITE_BOLD + "[F]" + Utils.RESET);
             return;
-        playing_animation = true;
-
-        if(success) {
+        }
+        
+        
+        if(state == State.PLAY) {
+            // if(success) {
             this.decollage();
-            this.succes();
-        } else {
-            this.decollage();
-            this.crash();
+            if(ville.canWin()) {
+                this.succes();
+            } else {
+                this.crash();
+            }
+            // } else {
+            //     this.decollage();
+            // }
+        } else if(state == State.END) {
+            if(ville.canWin()) {
+                Utils.printTxt(DANS_L_ESPACE);
+            } else {
+                Utils.printTxt(EXPLOSION_3);
+                println("Réesayer ? Cela vous coûtera 1000€");
+                println("Appuyez sur [F]");
+            }
         }
     };
 
     public void succes() throws IOException, InterruptedException {
-        clearMyScreen();
         Utils.printTxt(DANS_L_ESPACE);
-        Thread.sleep(10000);
+        state = State.END;
     }
 
-    public void affichageAlterne(String a, String b) throws IOException, InterruptedException { 
-        for(int i = 0; i < 20; i++) {
+    public void affichageAlterne(String a, String b, int nombre) throws IOException, InterruptedException { 
+        for(int i = 0; i < nombre; i++) {
             clearMyScreen();
             if(i%2 == 0)
                 Utils.printTxt(a);
@@ -57,7 +88,7 @@ public class Fusee extends Fenetre {
     }
 
     public void decollage() throws IOException, InterruptedException {
-        println(Utils.BLUE_BOLD + "Décollage dans...");
+        println("Décollage dans...");
         
         for(int i = 3; i >= 1; i--) {
             clearMyScreen();
@@ -73,7 +104,7 @@ public class Fusee extends Fenetre {
         Utils.printTxt(EN_TRAIN_DE_DECOLLER_1);
         Thread.sleep(500);
         
-        this.affichageAlterne(EN_TRAIN_DE_DECOLLER_2, EN_TRAIN_DE_DECOLLER_3);
+        this.affichageAlterne(EN_TRAIN_DE_DECOLLER_2, EN_TRAIN_DE_DECOLLER_3, 50);
     }
 
     public void crash() throws IOException, InterruptedException {
@@ -85,7 +116,7 @@ public class Fusee extends Fenetre {
         Utils.printTxt(EN_TRAIN_DE_CRASHER_2);
         Thread.sleep(500);
 
-        this.affichageAlterne(FLAMME_1, FLAMME_2);
+        this.affichageAlterne(FLAMME_1, FLAMME_2, 20);
 
         clearMyScreen();
         Utils.printTxt(FUSEE_SUR_TERRE);
@@ -101,11 +132,12 @@ public class Fusee extends Fenetre {
 
         clearMyScreen();
         Utils.printTxt(EXPLOSION_3);
+        state = State.END;
+
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        Fusee fusee = new Fusee();
-        fusee.update(false);
+    public void send() {
+        state = State.PLAY;
     }
 
 }

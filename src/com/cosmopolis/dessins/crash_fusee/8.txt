@@ -4,8 +4,8 @@
 |                         | 
  \._                   _./  
     ```--. . , ; .--'''       
-          | |   |         Vous avez perdu... Vous n'avez pas assez de points de recherche.
-       .-=||  | |=-.   
+          | |   |         La fusée s'est crashée...
+       .-=||  | |=-.      Vous n'avez pas assez de points de recherche!
        `-=#$%&%$#=-'   
           | ;  :|     
  _____.,-#%&$@%#&#~,._____
