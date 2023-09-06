@@ -18,4 +18,10 @@ public class Fenetre {
     protected void moveCursorTo(int x, int y) {
         System.out.print("\033[" + y + ";" + x + "H");
     }
+
+    protected void sleep(int milliseconds) {
+        try {
+            Thread.sleep((long)milliseconds);
+        } catch (InterruptedException ignore) {}
+      }
 }

@@ -5,6 +5,13 @@ import java.io.IOException;
 import com.cosmopolis.Controls;
 import com.cosmopolis.Utils;
 import com.cosmopolis.Ville;
+import com.cosmopolis.batiments.Batiment;
+import com.cosmopolis.batiments.CommerceBatiment;
+import com.cosmopolis.batiments.EcoleBatiment;
+import com.cosmopolis.batiments.ImmeubleBatiment;
+import com.cosmopolis.batiments.IndustrieBatiment;
+import com.cosmopolis.batiments.LaboratoireBatiment;
+import com.cosmopolis.batiments.MaisonBatiment;
 
 public class Magasin extends Fenetre {
     Ville ville;
@@ -27,11 +34,15 @@ public class Magasin extends Fenetre {
         }
         println("\n\r                               Ville de " + ville.getName() + Utils.RESET);
         println(Utils.RESET);
-        printLabel(1, 10, ville.getTotalBatiments("MaisonBatiment"), "maisons");
-        printLabel(2, 50, ville.getTotalBatiments("CommerceBatiment"), "commerces");
-        printLabel(3, 250, ville.getTotalBatiments("ImmeubleBatiment"), "immeubles");
-        printLabel(4, 50000, ville.getTotalBatiments("LaboratoiresBatiment"), "laboratoires");
+        
 
+        
+        printLabel(1, new MaisonBatiment());
+        printLabel(2, new CommerceBatiment());
+        printLabel(3, new ImmeubleBatiment());
+        printLabel(4, new EcoleBatiment());
+        printLabel(5, new IndustrieBatiment());
+        printLabel(6, new LaboratoireBatiment());
         // printProgressBar("Habitants", 0.25, Utils.GREEN_BACKGROUND, 30);
         // System.out.print("    ");
         // printProgressBar("Recherche", 0.5, Utils.PURPLE_BACKGROUND, 30);
@@ -65,13 +76,14 @@ public class Magasin extends Fenetre {
 
 
 
-    public void printLabel(int id, int price, int count, String label) {
+    public void printLabel(int id, Batiment batiment) {
+        int count = ville.getTotalBatiments(batiment.getClass().getSimpleName());
         String s = Utils.BLACK + "    [" + id + "] ";
-        if(price <= ville.getMoney()) {
+        if(batiment.getTotalPrice(count) <= ville.getMoney()) {
             s += Utils.GREEN_BOLD;
         } else {
             s += Utils.RED_BOLD;
         }
-        println(s + count + " " + Utils.RESET + label + Utils.BLACK + " (" + (int) Utils.getBuildingPrice(price, count) + "$)" + Utils.RESET);
+        println(s + count + " " + Utils.RESET + batiment.getLabel() + Utils.BLACK + " (" + (int) batiment.getTotalPrice(count) + "$)" + Utils.RESET);
     }
 }

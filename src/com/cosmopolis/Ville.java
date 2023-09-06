@@ -1,8 +1,5 @@
 package com.cosmopolis;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -162,36 +159,14 @@ public class Ville {
          */
 
         Batiment batiment = batiments.get(choice-1);
-        if (this.money >= batiment.getPrice()) {
+        int count = getTotalBatiments(batiment.getClass().getSimpleName());
+        if (this.money >= batiment.getTotalPrice(count)) {
             this.bats.add(batiment);
             Random rd = new Random();
             setResidents((batiment.getMinResidents() + rd.nextInt(batiment.getMaxResidents() - batiment.getMinResidents())) + getResidents());
-            removeMoney(batiment.getPrice());
+            removeMoney(batiment.getTotalPrice(count));
             return true;
         } else
             return false;
-    }
-
-    private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeObject(this.name);
-        out.writeObject(this.week);
-        out.writeObject(this.money);
-        out.writeObject(this.totalMoneySpent);
-        out.writeObject(this.residents);
-        out.writeObject(this.popularity);
-        out.writeObject(this.research);
-        out.writeObject(this.bats);
-    }
-
-    @SuppressWarnings("unchecked")
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        this.name = (String)in.readObject();
-        this.week = (int)in.readObject();
-        this.money = (float)in.readObject();
-        this.totalMoneySpent = (int)in.readObject();
-        this.residents = (int)in.readObject();
-        this.popularity = (double)in.readObject();
-        this.research = (int)in.readObject();
-        this.bats = (ArrayList<Batiment>)in.readObject();
     }
 }

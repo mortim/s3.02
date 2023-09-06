@@ -1,9 +1,9 @@
 package com.cosmopolis.tests;
 
-import static org.junit.Assert.assertTrue;
+// import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
+// import org.junit.jupiter.api.Test;
+// import org.junit.jupiter.api.BeforeEach;
 
 import com.cosmopolis.Ville;
 import com.cosmopolis.evenements.RandomEvent;

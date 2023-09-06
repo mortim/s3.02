@@ -5,12 +5,16 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import com.cosmopolis.Utils;
+
 public abstract class Batiment implements Serializable {
     private float price;
     private int min_residents;
     private int max_residents;
     private int landing;
     private int barhab;
+    private String label;
+
 
     /**
      * @param price Prix du bâtiment
@@ -18,12 +22,13 @@ public abstract class Batiment implements Serializable {
      * @param max_residents Nombre maximum d'habitants
      * @param landing Palier en nombre d'habitants
      */
-    public Batiment(int price, int min_residents, int max_residents, int landing, int barhab) {
+    public Batiment(int price, int min_residents, int max_residents, int landing, int barhab, String label) {
         this.price = price;
         this.min_residents = min_residents;
         this.max_residents = max_residents;
         this.landing = landing;
-        this.barhab=barhab;
+        this.barhab = barhab;
+        this.label = label;
     }
 
     public Batiment(int price, int landing){
@@ -33,6 +38,10 @@ public abstract class Batiment implements Serializable {
 
     public float getPrice() {
         return price;
+    }
+
+    public float getTotalPrice(int count) {
+        return Utils.getBuildingPrice(getPrice(), count);
     }
 
     public void setPrice(float price) {
@@ -79,5 +88,13 @@ public abstract class Batiment implements Serializable {
         this.min_residents = (int)in.readObject();
         this.max_residents = (int)in.readObject();
         this.landing = (int)in.readObject();
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 }
