@@ -69,7 +69,7 @@ public class Utils {
     }
 
     public static float getBuildingPrice(float basePrice, int count) {
-        return (float) (basePrice * Math.pow(1.05, count));
+        return (float) (basePrice * Math.pow(1.04, count));
     }
 
 

@@ -6,13 +6,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "App",
-            "request": "launch",
-            "mainClass": "com.cosmopolis.App",
-            "projectName": "groupe-15_d60e7640"
-        },
-        {
-            "type": "java",
             "name": "DefilementVille",
             "request": "launch",
             "mainClass": "com.cosmopolis.interfaces.DefilementVille",
@@ -23,7 +16,7 @@
             "name": "App",
             "request": "launch",
             "mainClass": "com.cosmopolis.App",
-            "projectName": "s3.01_a1854f44"
+            "projectName": "groupe-15_d60e7640"
         },
         {
             "type": "java",

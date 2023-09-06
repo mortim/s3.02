@@ -2,7 +2,7 @@ package com.cosmopolis.batiments;
 
 public class PostePoliceBatiment extends Batiment  {
     public PostePoliceBatiment(){
-        super(3000, 5, 10, 2000, 30, "poste de police");
+        super(3000, 20, 30, 1000, 30, "poste de police");
     }
 
     public String toString(){

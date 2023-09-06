@@ -62,7 +62,7 @@ public class Ville {
     /**
      * Le nombre de points de recherches du joueur
      */
-    private double research = 0.0;
+    public double research = 0.0;
 
     private List<Batiment> bats = new ArrayList<>();
 
@@ -226,19 +226,19 @@ public class Ville {
     }
 
     public double ecoleParHabitants() {
-        return (getTotalBatiments("EcoleBatiment") / (double) getResidents()) * 1000.0;
+        return ((1.0 + getTotalBatiments("EcoleBatiment")) / (double) getResidents()) * 1000.0;
     }
     
     public double abriParHabitants() {
-        return (getTotalBatiments("AbriBatiment") / (double) getResidents()) * 1000.0;
+        return ((1.25 + getTotalBatiments("AbriBatiment")) / (double) getResidents()) * 1000.0;
     }
     
     public double policeParHabitants() {
-        return (getTotalBatiments("PostePoliceBatiment") / (double) getResidents()) * 1000.0;
+        return ((1.25 + getTotalBatiments("PostePoliceBatiment")) / (double) getResidents()) * 1000.0;
     }
     
     public double pompiersParHabitants() {
-        return (getTotalBatiments("CasernePompierBatiment") / (double) getResidents()) * 1000.0;
+        return ((1.25 + getTotalBatiments("CasernePompierBatiment")) / (double) getResidents()) * 1000.0;
     }
     
 
@@ -247,6 +247,7 @@ public class Ville {
     }
 
     public double getResearchPointsForWeek() {
+        // return 10.0;
         return getTotalBatiments("LaboratoireBatiment") * 1.5 * Math.min(ecoleParHabitants(), 1.0);
     }
 }
