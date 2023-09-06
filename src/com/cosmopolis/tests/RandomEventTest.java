@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import com.cosmopolis.Ville;
-import com.cosmopolis.RandomEvent;
+import com.cosmopolis.evenements.Evenement;
+import com.cosmopolis.evenements.RandomEvent;
 
 public class RandomEventTest {
     
@@ -17,17 +18,17 @@ public class RandomEventTest {
     void init(){
         v = new Ville("test nom");
         v.setResidents(15);
-        r = new RandomEvent(15, "message", v);
+        r = new RandomEvent(v, Evenement.MOURRANT);
     }
 
     @Test
     void testGet(){
-        assertTrue(15 == r.getHabitants());
+        assertTrue(15 == v.getResidents());
     }
 
     @Test
     void testCreateEvent(){
-        r.createEvent(1.4,-1.5, "test message1");
-        assertTrue(15 < r.getVille().getResidents());
+        r.createEvent();
+        assertTrue(15 > v.getResidents());
     }
 }

@@ -64,6 +64,9 @@ public abstract class Batiment implements Serializable {
         return this.getClass().getSimpleName() + "(prix=" + this.price + ", min_residents=" + this.min_residents + ", max_residents=" + this.max_residents + ", palier=" + this.landing + ")";
     }
 
+    public int getBarHab(){return this.barhab;}
+
+
     private void writeObject(ObjectOutputStream out) throws IOException {
         out.writeObject(this.price);
         out.writeObject(this.min_residents);
@@ -71,7 +74,6 @@ public abstract class Batiment implements Serializable {
         out.writeObject(this.landing);   
     }
 
-    public int getBarHab(){return this.barhab;}
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         this.price = (float)in.readObject();
         this.min_residents = (int)in.readObject();

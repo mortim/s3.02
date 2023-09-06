@@ -1,6 +1,8 @@
 package com.cosmopolis;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.cosmopolis.interfaces.Click;
 import com.cosmopolis.interfaces.Fenetre;
@@ -31,6 +33,7 @@ public class Jeu extends Controls {
      * Les données du joueur
      */
     public Ville ville;
+    public ArrayList<Alert> alerts = new ArrayList<>();
 
     
     Jeu() throws InterruptedException, IOException {
@@ -61,12 +64,20 @@ public class Jeu extends Controls {
                 updateScreen();
             }            
             currentScreen.update();
+            for (int i = alerts.size() - 1; i >= 0; i--) {
+                Alert alert = alerts.get(i);
+                printAlert(alert.label);
+                alert.timeLeft -= 100;
+                if(alert.timeLeft < 0) {
+                    alerts.remove(alert);
+                }
+            }
             sleep(100);
             msUntilNextWeek -= 100;
         }
     }
 
-    public void updateScreen() throws FileNotFoundException, InterruptedException {
+    public void updateScreen() throws InterruptedException, IOException {
         switch (screen) {
             case 0:
                 currentScreen = new Click();
@@ -78,11 +89,12 @@ public class Jeu extends Controls {
                 currentScreen = new Fusee();
                 break;  
         }
+        lastScreen = screen;
     }
 
     public void tryToBuy(int choice) {
         if(!ville.buy(choice)) {
-            printAlert("Vous n'avez pas assez d'argent!");
+            alerts.add(new Alert("Vous n'avez pas assez d'argent!"));
         };
     }
 
@@ -99,6 +111,10 @@ public class Jeu extends Controls {
             tryToBuy(5);
         } else if(keyCode == Raccourcis.PAVE_6.getID() || keyCode == Raccourcis.SPECIAUX_6.getID()) {
             tryToBuy(6);
+        }
+        if(keyCode == Raccourcis.Q.getID()) {
+            println(Utils.RED_UNDERLINED + "Vous avez quitter le jeu." + Utils.RESET);
+            System.exit(0);
         }
         
         switch (keyCode) {
