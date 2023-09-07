@@ -16,7 +16,7 @@ public class Jeu extends Controls {
     /**
      * La longueur d'une semaine en millisecondes.
      */
-    public final int WEEK_LENGTH = 1000;
+    public final int WEEK_LENGTH = 1200;
 
     public final int TICK_LENGTH = 100;
     /**
@@ -193,13 +193,13 @@ public class Jeu extends Controls {
             case 2:
                 if(keyCode == Raccourcis.F.getID()) {
                     Fusee f = (Fusee) currentScreen;
-                    if(ville.getMoney() < 1000.0) {
+                    if(ville.getMoney() < 100000.0) {
                         alerts.add(new Alert("Vous n'avez pas assez d'argent!"));
                         return;
                     }
                     if(f.state == Fusee.State.NONE || (f.state == Fusee.State.END && !ville.canWin())) {
                         f.send();
-                        ville.removeMoney(1000.0f);
+                        ville.removeMoney(100000.0f);
                     }
                 }
         }

@@ -7,7 +7,7 @@ import com.cosmopolis.Utils;
 public class Click extends Fenetre {
     
     public void update() throws IOException {
-        println("╔═════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
+        println("╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
         println("║ Votre objectif est de construire la meilleure ville et d'envoyer une fusée.                             ║");
         println("║                                                                                                         ║");
         println("║ Tutoriel:                                                                                               ║");
@@ -16,7 +16,6 @@ public class Click extends Fenetre {
         println("║ Appuyez sur [Q/q] pour quitter le jeu.                                                                  ║");
         println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
         println("");
-        Utils.printTxt("src/com/cosmopolis/dessins/infos");
     }
 
     protected void println(Object content) {

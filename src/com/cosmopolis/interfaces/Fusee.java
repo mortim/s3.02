@@ -43,7 +43,7 @@ public class Fusee extends Fenetre {
         println(Utils.BLUE_BOLD);
         if(state == State.NONE) {
             println("Envoyer une fusée ?");
-            println("Cela vous coûtera 1000€");
+            println("Cela vous coûtera 100 000€");
             println("Appuyez sur " + Utils.WHITE_BOLD + "[F]" + Utils.RESET);
             return;
         }
@@ -65,7 +65,7 @@ public class Fusee extends Fenetre {
                 Utils.printTxt(DANS_L_ESPACE);
             } else {
                 Utils.printTxt(EXPLOSION_3);
-                println("Réesayer ? Cela vous coûtera 1000€");
+                println("Réesayer ? Cela vous coûtera  100 000€");
                 println("Appuyez sur [F]");
             }
         }
