@@ -44,7 +44,7 @@ public class Jeu extends Controls {
         ville = new Ville(nom);
         enableKeyTypedInConsole(true);
 
-        ville.setMoney(250);
+        ville.setMoney(100);
         while (true) {
             clearMyScreen();
             
