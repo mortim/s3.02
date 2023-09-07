@@ -44,7 +44,7 @@ public class Jeu extends Controls {
         ville = new Ville(nom);
         enableKeyTypedInConsole(true);
 
-        ville.setMoney(500);
+        ville.setMoney(250);
         while (true) {
             clearMyScreen();
             
@@ -56,23 +56,23 @@ public class Jeu extends Controls {
                     addAlert(true, randomEvent.createEvent());
                 }
                 
-                if(ville.getResidents() > 1000 && semainesDepuisEvenement > 7) {
+                if(ville.getResidents() > 1000 && semainesDepuisEvenement > 5) {
                     boolean evenementPassee = false;
                     // if(random.nextDouble() > (1.0 - Math.pow(ville.abriParHabitants(), 2))) {
                     //     RandomEvent randomEvent = new RandomEvent(ville, Evenement.SEISME);
                     //     addAlert(true, randomEvent.createEvent());
                     // }
-                    if(random.nextDouble() > Math.pow(ville.policeParHabitants(), 2)) {
+                    if(random.nextDouble() > Math.pow(ville.policeParHabitants(), semainesDepuisEvenement * 0.5)) {
                         RandomEvent randomEvent = new RandomEvent(ville, Evenement.BRAQUAGE);
                         addAlert(true, randomEvent.createEvent());
                         evenementPassee = true;
                     } else
-                    if(random.nextDouble() > Math.pow(ville.pompiersParHabitants(), 2)) {
+                    if(random.nextDouble() > Math.pow(ville.pompiersParHabitants(), semainesDepuisEvenement * 0.5)) {
                         RandomEvent randomEvent = new RandomEvent(ville, Evenement.INCENDIE);
                         addAlert(true, randomEvent.createEvent());
                         evenementPassee = true;
                     } else
-                    if (random.nextDouble() > Math.pow(ville.abriParHabitants(), 2)) {
+                    if (random.nextDouble() > Math.pow(ville.abriParHabitants(), semainesDepuisEvenement * 0.5)) {
                         RandomEvent randomEvent = new RandomEvent(ville, Evenement.SEISME);
                         addAlert(true, randomEvent.createEvent());
                         evenementPassee = true;
