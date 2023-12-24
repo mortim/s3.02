@@ -6,9 +6,11 @@ Jeu incrémental et passif (idle game) en mode texte dans lequel nous devons cr�
 |---|---|
 | ![example1](exemples/1.png)  | ![example2](exemples/2.png)  |
 
-### Génération de l'UML
+#### Releases
 
-**IMPORTANT: Déplacer le dossier 'tests' à la racine du projet pour éviter des erreurs de compilation de la part de javadoc.**
+Vous pouvez trouver la dernière version du jeu juste [ici](https://github.com/mortim/s3.02/releases/tag/v1):
+
+#### Génération de la Javadoc/UML
 
 ```
 $ javadoc -d uml -private -sourcepath src -docletpath lib/umldoclet-2.1.0.jar -doclet nl.talsmasoftware.umldoclet.UMLDoclet -subpackages com.cosmopolis
