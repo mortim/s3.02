@@ -8,7 +8,7 @@ Jeu incrémental et passif (idle game) en mode texte dans lequel nous devons cr�
 
 #### Releases
 
-Vous pouvez trouver la dernière version du jeu juste [ici](https://github.com/mortim/s3.02/releases/tag/v1):
+Vous pouvez trouver la dernière version du jeu juste [ici](https://github.com/mortim/s3.02/releases/tag/V1)
 
 #### Génération de la Javadoc/UML
 
