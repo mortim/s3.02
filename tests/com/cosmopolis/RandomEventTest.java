@@ -1,12 +1,10 @@
-package com.cosmopolis.tests;
-
+package com.cosmopolis;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.cosmopolis.Ville;
 import com.cosmopolis.evenements.Evenement;
 import com.cosmopolis.evenements.RandomEvent;
 

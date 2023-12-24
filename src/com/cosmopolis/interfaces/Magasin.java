@@ -40,13 +40,13 @@ public class Magasin extends Fenetre {
         System.out.print(Utils.BLACK_BOLD);
         try {
             if(ville.getResidents() == 0) {
-                Utils.printTxt("src/com/cosmopolis/dessins/village/arbre.txt");
+                Utils.printTxt("/com/cosmopolis/dessins/village/arbre.txt");
             } else if(ville.getResidents() <= 10) {
-                Utils.printTxt("src/com/cosmopolis/dessins/village/maison.txt");
+                Utils.printTxt("/com/cosmopolis/dessins/village/maison.txt");
             } else if(ville.getResidents() <= 1000) {
-                Utils.printTxt("src/com/cosmopolis/dessins/village/village.txt");
+                Utils.printTxt("/com/cosmopolis/dessins/village/village.txt");
             } else if(ville.getResidents() >= 1000) {
-                Utils.printTxt("src/com/cosmopolis/dessins/village/" + frame +".txt");
+                Utils.printTxt("/com/cosmopolis/dessins/village/" + frame +".txt");
             }
             
         } catch (IOException e) {

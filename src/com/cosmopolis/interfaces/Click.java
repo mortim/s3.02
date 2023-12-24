@@ -19,7 +19,7 @@ public class Click extends Fenetre {
         println("║ °-Appuyez sur [Q/q] pour quitter le jeu.                                                                ║");
         println("╚═════════════════════════════════════════════════════════════════════════════════════════════════════════╝");
         println("");
-        Utils.printTxt("src/com/cosmopolis/dessins/infos");
+        Utils.printTxt("/com/cosmopolis/dessins/infos.txt");
     }
 
     protected void println(Object content) {

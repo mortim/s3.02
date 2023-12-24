@@ -1,9 +1,13 @@
 package com.cosmopolis;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.net.URL;
 import java.util.Scanner;
 
 public class Utils {
@@ -74,14 +78,11 @@ public class Utils {
 
 
     public static void printTxt(String path) throws IOException {
-        Scanner input = new Scanner(new FileReader(path));
-        while (input.hasNextLine())
-        {
-           System.out.print("\r" + input.nextLine() + "\r\n");
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(Utils.class.getResourceAsStream(path)))) {
+            while(br.ready())
+                System.out.print("\r" + br.readLine() + "\r\n");
         }
     }
-
-
 
     public static String lireFichier(String filepath) throws FileNotFoundException {
         String output = "";

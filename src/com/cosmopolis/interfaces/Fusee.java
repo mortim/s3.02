@@ -9,22 +9,22 @@ import com.cosmopolis.Ville;
 public class Fusee extends Fenetre {
 
     public Ville ville;
-    private final String DANS_L_ESPACE = "src/com/cosmopolis/dessins/decollage_fusee/4.txt";
+    private final String DANS_L_ESPACE = "/com/cosmopolis/dessins/decollage_fusee/4.txt";
     // -- Décollage
-    private final String PRET_AU_DECOLLAGE = "src/com/cosmopolis/dessins/decollage_fusee/1.txt";
-    private final String DECOLLAGE = "src/com/cosmopolis/dessins/decollage_fusee/2.txt";
-    private final String EN_TRAIN_DE_DECOLLER_1 = "src/com/cosmopolis/dessins/decollage_fusee/3a.txt";
-    private final String EN_TRAIN_DE_DECOLLER_2 = "src/com/cosmopolis/dessins/decollage_fusee/3b.txt";
-    private final String EN_TRAIN_DE_DECOLLER_3 = "src/com/cosmopolis/dessins/decollage_fusee/3b-1.txt";
+    private final String PRET_AU_DECOLLAGE = "/com/cosmopolis/dessins/decollage_fusee/1.txt";
+    private final String DECOLLAGE = "/com/cosmopolis/dessins/decollage_fusee/2.txt";
+    private final String EN_TRAIN_DE_DECOLLER_1 = "/com/cosmopolis/dessins/decollage_fusee/3a.txt";
+    private final String EN_TRAIN_DE_DECOLLER_2 = "/com/cosmopolis/dessins/decollage_fusee/3b.txt";
+    private final String EN_TRAIN_DE_DECOLLER_3 = "/com/cosmopolis/dessins/decollage_fusee/3b-1.txt";
     // --- Crash
-    private String EN_TRAIN_DE_CRASHER_1 = "src/com/cosmopolis/dessins/crash_fusee/0.txt";
-    private final String EN_TRAIN_DE_CRASHER_2 = "src/com/cosmopolis/dessins/crash_fusee/0a.txt"; 
-    private final String FLAMME_1 = "src/com/cosmopolis/dessins/crash_fusee/4.txt";
-    private String FLAMME_2 = "src/com/cosmopolis/dessins/crash_fusee/4a.txt";
-    private final String FUSEE_SUR_TERRE = "src/com/cosmopolis/dessins/crash_fusee/5.txt";
-    private final String EXPLOSION_1 = "src/com/cosmopolis/dessins/crash_fusee/6.txt";
-    private final String EXPLOSION_2 = "src/com/cosmopolis/dessins/crash_fusee/7.txt";
-    private final String EXPLOSION_3 = "src/com/cosmopolis/dessins/crash_fusee/8.txt";
+    private String EN_TRAIN_DE_CRASHER_1 = "/com/cosmopolis/dessins/crash_fusee/0.txt";
+    private final String EN_TRAIN_DE_CRASHER_2 = "/com/cosmopolis/dessins/crash_fusee/0a.txt"; 
+    private final String FLAMME_1 = "/com/cosmopolis/dessins/crash_fusee/4.txt";
+    private String FLAMME_2 = "/com/cosmopolis/dessins/crash_fusee/4a.txt";
+    private final String FUSEE_SUR_TERRE = "/com/cosmopolis/dessins/crash_fusee/5.txt";
+    private final String EXPLOSION_1 = "/com/cosmopolis/dessins/crash_fusee/6.txt";
+    private final String EXPLOSION_2 = "/com/cosmopolis/dessins/crash_fusee/7.txt";
+    private final String EXPLOSION_3 = "/com/cosmopolis/dessins/crash_fusee/8.txt";
 
     public enum State {
         NONE,

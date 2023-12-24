@@ -1,13 +1,7 @@
-package com.cosmopolis.tests;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+package com.cosmopolis;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.cosmopolis.Sauvegarde;
-import com.cosmopolis.Ville;
 
 public class SauvegardeTest {
     

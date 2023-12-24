@@ -4,7 +4,6 @@ package com.cosmopolis.interfaces;
 import java.io.IOException;
 
 import com.cosmopolis.Jeu;
-import com.cosmopolis.Utils;
 
 public class Menu extends Fenetre {
     public Jeu jeu;
@@ -14,7 +13,7 @@ public class Menu extends Fenetre {
     }
     public void update() throws IOException {
         // println(Utils.RED_BOLD);
-        // Utils.printTxt("src/com/cosmopolis/dessins/logo.txt");
+        // Utils.printTxt("/com/cosmopolis/dessins/logo.txt");
         // println("\n" + Utils.RESET + "[1] Nouvelle partie");
         // println(Utils.BLACK + "[2] Continuer" + Utils.RESET);
         // println("[Q] Quitter le jeu");
@@ -23,7 +22,7 @@ public class Menu extends Fenetre {
         // }
 
         // clearMyScreen();
-        // Utils.printTxt("src/com/cosmopolis/dessins/comment_jouer.txt");
+        // Utils.printTxt("/com/cosmopolis/dessins/comment_jouer.txt");
         // sleep(4000);
     }
 }
